@@ -1451,6 +1451,8 @@
       
         
       
+        
+      
     
     
     
@@ -1961,14 +1963,6 @@
       
         
       
-        
-      
-        
-      
-        
-      
-        
-      
     
     
     
@@ -1992,7 +1986,7 @@
   <span class="md-ellipsis">
     
   
-    Customization
+    Tag sources
   
 
     
@@ -2005,6 +1999,136 @@
         
         <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_2_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_4_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Tag sources
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../tag-sources/freedb/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    freedb and gnudb
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../tag-sources/local-freedb/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Local freedb database
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_3" id="__nav_4_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Customization
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_3">
             <span class="md-nav__icon md-icon"></span>
             
   
@@ -7427,11 +7551,15 @@ matching before importing it.</p>
 </tr>
 <tr>
 <td><strong>freedb…</strong></td>
-<td>Query the configured online <abbr title="Compact Disc Database, the protocol of freedb and gnudb">CDDB</abbr>-compatible server using selected-file timing or an entered disc ID</td>
+<td>Query the configured server by selected-file track layout, or search gnudb by artist and album</td>
 </tr>
 <tr>
 <td><strong>freedb (local)…</strong></td>
 <td>Search a configured local freedb database/index; Primary+L</td>
+</tr>
+<tr>
+<td><strong>Covers: freedb (gnudb)…</strong></td>
+<td>Search gnudb artwork without importing tag fields</td>
 </tr>
 <tr>
 <td><strong>Covers: MusicBrainz…</strong></td>
@@ -7451,11 +7579,14 @@ matching before importing it.</p>
 </tr>
 </tbody>
 </table>
-<p>The baseline freedb dialog offers <strong>Disc ID of the selected files</strong> and
-<strong>freedb disc ID</strong>. The local database can also expose <strong>Artist and album
-words</strong> through its text index. This is a lookup from files/identifiers; the
-current dialog does not expose a physical-CD-drive selector. Online freedb
-free-text search is not one of this baseline dialog's modes.</p>
+<p>The remote <a href="../../../tag-sources/freedb/">freedb dialog</a> offers <strong>Track layout
+of the selected files</strong> and <strong>Artist and album</strong>. Text and artwork searches
+require a recognized gnudb host. OpenTag asks for matches before reading the
+chosen entry; it does not read a remote entry from a typed disc ID.</p>
+<p>The <a href="../../../tag-sources/local-freedb/">local database</a> supports a disc ID
+derived from the selected files or typed directly, plus <strong>Artist and album
+words</strong> through its text index. These are lookups from files/identifiers;
+the dialog does not expose a physical-CD-drive selector.</p>
 <p>Configure provider/server and local-index settings under
 <a href="../../options/tag-sources/">Options → Tag Sources</a>,
 <a href="../../options/tag-sources-freedb/">freedb</a> and
@@ -7499,7 +7630,7 @@ assuming the entire selected album was updated.</p>
 Primary+A/Primary+Shift+A for selection and Primary+E/D to enable/disable all.
 Alt+Up/Down or Alt+Page Up/Down moves file rows for matching. See
 <a href="../../keyboard-shortcuts/">keyboard shortcuts</a> for the complete focus rules.</p>
-<!-- Source baseline main5f4112e. Pending application PRs can change provider, language or protocol behavior; reconcile after integration. No remote-service or native-runtime validation is claimed here. -->
+<!-- Source: integrated PR19 src/main.ts Tag Sources menu; src/tag-sources.ts freedbModes and sourceOperation. No remote-service or native-runtime validation is claimed here. -->
 
 
 

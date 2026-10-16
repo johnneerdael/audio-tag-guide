@@ -1451,6 +1451,8 @@
       
         
       
+        
+      
     
     
     
@@ -1961,14 +1963,6 @@
       
         
       
-        
-      
-        
-      
-        
-      
-        
-      
     
     
     
@@ -1992,7 +1986,7 @@
   <span class="md-ellipsis">
     
   
-    Customization
+    Tag sources
   
 
     
@@ -2005,6 +1999,136 @@
         
         <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_2_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_4_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Tag sources
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../tag-sources/freedb/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    freedb and gnudb
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../tag-sources/local-freedb/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Local freedb database
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_3" id="__nav_4_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Customization
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_3">
             <span class="md-nav__icon md-icon"></span>
             
   
@@ -5152,10 +5276,32 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#email-and-application-identity" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Email and application identity
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#disc-id-fields" class="md-nav__link">
     <span class="md-ellipsis">
       
         Disc ID fields
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#search-methods" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Search methods
       
     </span>
   </a>
@@ -7287,10 +7433,32 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#email-and-application-identity" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Email and application identity
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#disc-id-fields" class="md-nav__link">
     <span class="md-ellipsis">
       
         Disc ID fields
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#search-methods" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Search methods
       
     </span>
   </a>
@@ -7438,27 +7606,33 @@
 <td>Optional number from 1 to 65535. Empty uses the protocol's default port.</td>
 </tr>
 <tr>
-<td><strong>Email address</strong></td>
+<td><strong>Your email address (sent to the freedb server)</strong></td>
 <td>Optional configured identity sent in the <abbr title="Compact Disc Database, the protocol of freedb and gnudb">CDDB</abbr> handshake, not a login password. Defaults to empty.</td>
 </tr>
 </tbody>
 </table>
-<p>The handshake contains a user/host identity plus OpenTag's application identity and version. On the guide's baseline source, leaving email empty uses the fallback <code>opentag</code> / <code>localhost</code> identity. Newer development code changes that fallback and validates the address; do not assume a newer service-registration fix has shipped merely because the options are visible.</p>
-<p>gnudb may accept only applications registered by its operator. A refusal message is a service/application registration issue, not evidence that the endpoint settings were saved incorrectly. Choose a compatible server or local database when appropriate. Ordinary timeout/proxy behavior is configured under <a href="../networking/">Networking</a>.</p>
+<p>The default endpoint is <code>https://gnudb.gnudb.org/~cddb/cddb.cgi</code>. HTTPS encrypts the connection; HTTP does not. Choose a protocol the selected server supports.</p>
+<h2 id="email-and-application-identity">Email and application identity<a class="headerlink" href="#email-and-application-identity" title="Permanent link">&para;</a></h2>
+<p>An address entered here must look like <code>name@example.org</code>. Every request sends its user/domain components with <code>OpenTagAudioTagEditor</code> and the application version. Empty email sends the developer contact <code>john@neerdael.nl</code>. Use an address intended to be shared with the selected server. This identifies the client; it is not a password or account sign-in.</p>
+<p>gnudb may accept only applications registered by its operator and may reply <code>500 Unknown application</code> otherwise. Changing the email address does not register OpenTag, and saving valid settings does not establish live registration. A refusal message is a service/application registration issue, not evidence that the endpoint settings were saved incorrectly. Choose a compatible server or local database when appropriate. Ordinary timeout/proxy behavior is configured under <a href="../networking/">Networking</a>.</p>
 <h2 id="disc-id-fields">Disc ID fields<a class="headerlink" href="#disc-id-fields" title="Permanent link">&para;</a></h2>
 <p>Both switches default to off:</p>
 <ul>
 <li><strong>Copy disc ID to COMMENT field</strong> includes the source disc ID in the imported comment data. Review the comment in the import before applying it if it already holds notes worth keeping.</li>
 <li><strong>Copy disc ID to DISCID field</strong> imports the disc ID into its dedicated <code>DISCID</code> field, keeping that identity separate from human-readable comments.</li>
 </ul>
+<p>The entry's own freedb <code>DISCID</code> is used when present, falling back to the listed ID. It can differ from the gnudb <strong>Entry ID</strong> shown in results.</p>
 <p>These govern metadata imported from freedb; they do not change the audio or make a server accept the client. The disc ID is not a MusicBrainz release identifier, a barcode, or a filesystem path.</p>
+<h2 id="search-methods">Search methods<a class="headerlink" href="#search-methods" title="Permanent link">&para;</a></h2>
+<p>Use <a href="../../../tag-sources/freedb/">remote freedb lookup</a> by track layout or artist and album. Typed disc-ID lookup is available only for a <a href="../../../tag-sources/local-freedb/">local snapshot</a>. OpenTag asks the server for matches before reading the chosen entry.</p>
+<p>Artist/album and artwork search are restricted to recognized gnudb hosts (<code>gnudb.org</code> or its subdomains). Other configured <abbr title="Compact Disc Database, the protocol of freedb and gnudb">CDDB</abbr> servers use track-layout lookup, even if they implement similar text commands. If the server answers <code>429 Too Many Requests</code>, wait before searching again; OpenTag does not automatically repeat that rejected request.</p>
 <h2 id="related">Related<a class="headerlink" href="#related" title="Permanent link">&para;</a></h2>
 <ul>
 <li><a href="../tag-sources-local-freedb/">Local freedb</a></li>
 <li><a href="../tag-sources/">Tag Sources cover settings</a></li>
 <li><a href="../networking/">Networking</a></li>
 </ul>
-<!-- verified: baseline007a806 src/tag-sources.ts FREEDB_SERVERS, freedbServerList, bindServers, tagSourcesOptionsPages; src-tauri/src/sources/freedb.rs settings_from, command_url, hello_identity. PR20 103019c changes client/email protocol; baseline wording intentional. -->
+<!-- Source: PR19 integrated source src/tag-sources.ts FREEDB_SERVERS, server controls, freedbModes and validation; src-tauri/src/sources/freedb.rs hello_identity, request_url, parse_xmcd; sources/mod.rs query-before-read. Source/fixture evidence does not establish live registration. -->
 
 
 

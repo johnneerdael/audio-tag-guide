@@ -1451,6 +1451,8 @@
       
         
       
+        
+      
     
     
     
@@ -1961,14 +1963,6 @@
       
         
       
-        
-      
-        
-      
-        
-      
-        
-      
     
     
     
@@ -1992,7 +1986,7 @@
   <span class="md-ellipsis">
     
   
-    Customization
+    Tag sources
   
 
     
@@ -2005,6 +1999,136 @@
         
         <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_2_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_4_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Tag sources
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../tag-sources/freedb/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    freedb and gnudb
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../tag-sources/local-freedb/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Local freedb database
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_3" id="__nav_4_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Customization
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_3">
             <span class="md-nav__icon md-icon"></span>
             
   
@@ -5180,6 +5304,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#lookup-methods" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lookup methods
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#no-matching-album" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -7287,6 +7422,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#lookup-methods" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lookup methods
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#no-matching-album" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -7410,18 +7556,46 @@
 <p>Extract the snapshot before selecting it; a downloaded compressed archive is not the database folder. A nonexistent path or unreadable category data cannot provide matches. Store it somewhere the app can continue to access.</p>
 <p>Local lookup by disc ID reads that snapshot. The historical Mp3tag documentation says audio-file-based lookup is unavailable locally. Do not transfer that restriction to OpenTag unchanged: its local reader supports disc-ID lookup, and its tag-source workflow can derive a disc ID from a suitable ordered track layout. That is metadata matching, not an acoustic fingerprint of the music.</p>
 <h2 id="text-index">Text index<a class="headerlink" href="#text-index" title="Permanent link">&para;</a></h2>
-<p>To search by artist/album words, choose <strong>Build index</strong>. The page reports whether an index exists, its disc count, and whether it belongs to the currently entered folder. Building has progress reporting; <strong>Cancel</strong> requests cancellation.</p>
-<p>An index for another folder is not a valid index for this folder. Rebuild after replacing the snapshot or changing the configured root. An empty root must be set before building can start. In environments without the index backend, the button is unavailable and the page states that text indexing is not available there.</p>
+<p>To search by artist/album words, choose <strong>Build index</strong>. The page reports whether an index exists, its disc count, and whether it belongs to the currently entered folder. Building has progress reporting; <strong>Cancel</strong> requests cancellation. An unfinished build does not replace the previous completed index.</p>
+<p>An index for another folder is not a valid index for this folder. Rebuild after replacing the snapshot or changing the configured root; changes to database files are not indexed automatically. An empty root must be set before building can start. In environments without the index backend, the button is unavailable and the page states that text indexing is not available there.</p>
 <p>Building an index performs work immediately using the entered folder. Saving Options chooses which folder later searches use; canceling the outer dialog does not undo a completed index build. No local index is needed for a direct disc-ID lookup.</p>
+<h2 id="lookup-methods">Lookup methods<a class="headerlink" href="#lookup-methods" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th><strong>SEARCH BY</strong></th>
+<th>Input</th>
+<th>Text index needed?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Disc ID of the selected files</strong></td>
+<td>ID derived from file-list order and durations</td>
+<td>No</td>
+</tr>
+<tr>
+<td><strong>freedb disc ID</strong></td>
+<td>Existing freedb disc ID entered in <strong>DISC ID</strong></td>
+<td>No</td>
+</tr>
+<tr>
+<td><strong>Artist and album words</strong></td>
+<td>Words in indexed artist/album titles</td>
+<td>Yes</td>
+</tr>
+</tbody>
+</table>
+<p>For selected-file lookup, use one complete disc in track order with known durations and at most 99 files. A local disc ID is distinct from gnudb's listed <strong>Entry ID</strong>, a barcode or a MusicBrainz identifier. The database is not updated from gnudb and does not receive corrections when tags are saved.</p>
 <h2 id="no-matching-album">No matching album<a class="headerlink" href="#no-matching-album" title="Permanent link">&para;</a></h2>
-<p>Confirm the selected files belong to one complete disc, their list order and durations are appropriate, and the snapshot actually contains the release. A title search needs an index; a missing disc cannot be recovered by rebuilding the same snapshot's index. A newer edition may require another source.</p>
+<p>Confirm the selected files belong to one complete disc, their list order and durations are appropriate, and the snapshot actually contains the release. A title search needs an index; a missing disc cannot be recovered by rebuilding the same snapshot's index. A newer edition may require another source. See <a href="../../../tag-sources/local-freedb/">Search a local freedb snapshot</a> for the three lookup methods and import review.</p>
 <h2 id="related">Related<a class="headerlink" href="#related" title="Permanent link">&para;</a></h2>
 <ul>
 <li><a href="../tag-sources-freedb/">Remote freedb server</a></li>
 <li><a href="../tag-sources/">Tag Sources</a></li>
 <li><a href="../library/">Library cache</a></li>
 </ul>
-<!-- verified: baseline007a806 src/tag-sources.ts local-freedb options, bindIndex, disc-ID derivation; src-tauri/src/sources/freedb.rs local_search/local entry reader; src-tauri/src/sources local index implementation. Original local audio-lookup restriction explicitly distinguished. -->
+<!-- Source: PR19 integrated source src/tag-sources.ts local options, bindIndex and freedbModes; src-tauri/src/sources/freedb.rs local readers; freedb_index.rs staged build/status/search. Original local audio-lookup restriction explicitly distinguished. -->
 
 
 
