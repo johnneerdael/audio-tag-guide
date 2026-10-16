@@ -1,0 +1,9100 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Learn to tag, rename, organise and export your music with OpenTag, the open-source audio metadata editor.">
+      
+      
+      
+        <link rel="canonical" href="https://johnneerdael.github.io/audio-tag-guide/reference/tag-mapping/">
+      
+      
+        <link rel="prev" href="../field-names/">
+      
+      
+        <link rel="next" href="../file-formats/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/brand/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>Tag mapping table - OpenTag user guide</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300,300i,400,400i,700,700i%7CJetBrains+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Inter";--md-code-font:"JetBrains Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/opentag.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#tag-mapping-tables" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="OpenTag user guide" class="md-header__button md-logo" aria-label="OpenTag user guide" data-md-component="logo">
+      
+  <img src="../../assets/brand/mark.svg" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            OpenTag user guide
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Tag mapping table
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m14.3 16-.7-2h-3.2l-.7 2H7.8L11 7h2l3.2 9zM20 8.69V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12zm-9.15 3.96h2.3L12 9z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_2" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="custom" data-md-color-accent="custom"  aria-label="Follow the system setting"  type="radio" name="__palette" id="__palette_2">
+    
+      <label class="md-header__button md-icon" title="Follow the system setting" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="Share" aria-label="Share" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91s2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08"/></svg>
+          </a>
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/johnneerdael/opentag" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    johnneerdael/opentag
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../getting-started/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Get started
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../learn/first-tagging-session/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Learn
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../guides/file-list/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Guides
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../converters/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Automate
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Reference
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../cookbook/find-missing-fields/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Cookbook
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../platforms/macos/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Platforms
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../help/faq/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Help
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="OpenTag user guide" class="md-nav__button md-logo" aria-label="OpenTag user guide" data-md-component="logo">
+      
+  <img src="../../assets/brand/mark.svg" alt="logo">
+
+    </a>
+    OpenTag user guide
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/johnneerdael/opentag" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    johnneerdael/opentag
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../getting-started/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Get started
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2" id="__nav_2_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Get started
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../getting-started/install/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Download and install
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../getting-started/main-window/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    The main window
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../getting-started/opening-files/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Opening files
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../getting-started/editing-and-saving/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Editing, saving and undo
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Learn
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Learn
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_1" id="__nav_3_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tutorials
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Tutorials
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../learn/first-tagging-session/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Your first tagging session
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../learn/tags-from-filenames/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Get tags from filenames
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../learn/clean-a-messy-library/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Clean up a messy library
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../learn/give-every-album-a-cover/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Give every album a cover
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../learn/format-strings-from-zero/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Format strings from zero
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../learn/rename-files-and-folders/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Rename files and folders
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../learn/regex-from-zero/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Regular expressions from zero
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../learn/first-action-group/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Build your first action group
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../learn/export-a-cd-catalogue/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Export a CD catalogue
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_2" id="__nav_3_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Concepts
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Concepts
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/what-are-tags/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    What tags are
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/tag-formats/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tag formats
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/track-and-disc-numbers/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Track and disc numbers
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/cover-art/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cover art
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/sort-fields/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sort fields and compilations
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/replaygain/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ReplayGain and loudness
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/multi-value-fields/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Multi-value fields
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/text-encodings/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Text encodings and codepages
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Guides
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Guides
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_1" id="__nav_4_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Everyday editing
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Everyday editing
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guides/file-list/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    The file list
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guides/tag-panel/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    The tag panel
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guides/copy-paste-tags/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cut, copy and paste tags
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guides/remove-tags/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Removing tags
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guides/extended-tags/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Extended tags
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guides/covers/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Working with covers
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guides/chapters/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapters and cue sheets as rows
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guides/filter/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Filtering the file list
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guides/find/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Find text
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guides/file-operations/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Copy, move and delete files
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guides/undo-history/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Undo and history
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guides/utilities/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Built-in utilities
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guides/library/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Library cache
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_2" id="__nav_4_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Customization
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Customization
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../customize/configuration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Save and restore configuration
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../customize/toolbars/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Toolbars
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../customize/tools/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    External tools
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../customize/field-values/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Field values
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../customize/columns/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    File-list columns
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../customize/tag-panel/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tag panel
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Automate
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Automate
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_1" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../converters/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Converters
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_5_1" id="__nav_5_1_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Converters
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../converters/tag-to-filename/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tag → Filename
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../converters/filename-to-tag/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Filename → Tag
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../converters/filename-to-filename/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Filename → Filename
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../converters/text-file-to-tag/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Text File → Tag
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../converters/tag-to-tag/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tag → Tag
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../converters/auto-numbering/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Auto-numbering
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_2" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../actions/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Actions
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_5_2" id="__nav_5_2_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Actions
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_2_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_2_2" id="__nav_5_2_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Action types
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_5_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Action types
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../actions/adjust-cover/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Adjust cover
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../actions/case-conversion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Case conversion
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../actions/convert-codepage/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Convert codepage
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../actions/export/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Export
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../actions/export-cover/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Export cover to file
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../actions/format-value/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Format value
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../actions/generate-playlists/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Generate playlists
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../actions/guess-values/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Guess values
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../actions/import-cover/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Import cover from file
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../actions/import-text-file/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Import text file
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../actions/merge-duplicate-fields/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Merge duplicate fields
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../actions/remove-duplicate-fields/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Remove duplicate fields
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../actions/remove-fields/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Remove fields
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../actions/remove-fields-except/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Remove fields except
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../actions/replace/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Replace
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../actions/replace-regexp/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Replace with regular expression
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../actions/set-cover-properties/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Set cover properties
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../actions/split-field/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Split field by separator
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_3" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../export/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Export and playlists
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_5_3" id="__nav_5_3_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Export and playlists
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../export/template-language/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Export template language
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../export/template-gallery/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Template gallery
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../export/csv/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Export CSV
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guides/playlists/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Playlists and cue sheets
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_4" id="__nav_5_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Web sources
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Web sources
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tag-sources/web-sources/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Install and use sources
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tag-sources/writing-web-sources/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Write a web source
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tag-sources/web-source-reference/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Parser reference
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" checked>
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Reference
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_6" id="__nav_6_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Reference
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../format-strings/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Format strings
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../placeholders/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Placeholders
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6_4" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../scripting/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Scripting functions
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_6_4" id="__nav_6_4_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_6_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Scripting functions
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../scripting/text/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Text and case
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../scripting/search-compare/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Search and compare
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../scripting/conditions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Conditions and logic
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../scripting/numbers/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Numbers and maths
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../scripting/dates-durations/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Dates and durations
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../scripting/lists-metadata/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lists, metadata and environment
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../regular-expressions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Regular expressions
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../filter-syntax/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Filter syntax
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../field-names/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Field names
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tag mapping table
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tag mapping table
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#how-to-read-these-tables" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How to read these tables
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#id3v2-and-mp4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ID3v2 and MP4
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#matroska-asf-and-riff-info" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Matroska, ASF, and RIFF INFO
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#custom-field-fallback" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Custom-field fallback
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#field-specific-storage-rules" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Field-specific storage rules
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#user-defined-field-names" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        User-defined field names
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#related" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Related
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../file-formats/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Supported file formats
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../command-line/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Command line
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../keyboard-shortcuts/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Keyboard shortcuts
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6_12" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../menus/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Menus
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_6_12" id="__nav_6_12_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_6_12_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6_12">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Menus
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../menus/file/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    File
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../menus/edit/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Edit
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../menus/view/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    View
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../menus/convert/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Convert
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../menus/actions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Actions
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../menus/tag-sources/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tag Sources
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../menus/tools/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tools
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../menus/help/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Help
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../menus/context-menus/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Context and helper menus
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6_13" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../options/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Options
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_6_13" id="__nav_6_13_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_6_13_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6_13">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Options
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../options/general/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    General
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../options/messages/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Messages
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../options/files/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Files
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../options/directories/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Directories
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../options/appearance/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Appearance
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../options/library/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Library
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../options/tags/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tags
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../options/tags-mpeg/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tags → Mpeg
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../options/tags-ape-mpc/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tags → Ape, Mpc
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../options/tags-mapping/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tags → Mapping
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../options/tags-advanced/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tags → Advanced
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../options/tag-panel/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tag panel
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../options/field-values/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Field values
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../options/networking/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Networking
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../options/updates/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Updates
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../options/tag-sources/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tag sources
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../options/tag-sources-freedb/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tag sources → freedb
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../options/tag-sources-local-freedb/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tag sources → Local freedb
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../options/export/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Export
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../options/playlist/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Playlist
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../options/tools/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tools
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cookbook
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Cookbook
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_7_1" id="__nav_7_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Inspect your files
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Inspect your files
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cookbook/find-missing-fields/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Find missing fields
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cookbook/find-missing-covers/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Find missing embedded covers
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cookbook/find-low-bitrate/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Find low bitrates
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_7_2" id="__nav_7_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Playlists
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Playlists
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cookbook/playlist-per-album/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    One playlist per album folder
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_7_3" id="__nav_7_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cover artwork
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Cover artwork
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cookbook/export-folder-jpg/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Save embedded covers as folder images
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cookbook/embed-folder-jpg/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Embed each folder image
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cookbook/resize-covers/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Shrink oversized covers
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cookbook/keep-only-front-cover/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Keep each file’s front covers
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_7_4" id="__nav_7_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Numbers and dates
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Numbers and dates
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cookbook/split-track-total/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Read or split track totals
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cookbook/number-tracks-per-folder/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Number tracks per folder
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cookbook/disc-numbers-from-folders/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Disc numbers from folders
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cookbook/year-from-date/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Keep only the year
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_7_5" id="__nav_7_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Clean text and credits
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Clean text and credits
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cookbook/trim-spaces/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Remove extra spaces
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cookbook/remove-text-in-brackets/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Remove trailing remaster annotations
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cookbook/split-multiple-artists/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Split artist lists
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cookbook/split-artist-title/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Split Artist - Title credits
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_7_6" id="__nav_7_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Rename files and folders
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Rename files and folders
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cookbook/rename-lowercase-filenames/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lowercase names with hyphens
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cookbook/rename-safe-characters/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Keep filenames portable
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cookbook/rename-into-artist-album-folders/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Artist and album folders
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cookbook/rename-multi-disc-albums/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Keep multi-disc paths distinct
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cookbook/rename-compilations/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Keep compilations together
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cookbook/rename-zero-padded-track-numbers/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Zero-padded track numbers in filenames
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7_7" id="__nav_7_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Fix and tidy tags
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Fix and tidy tags
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cookbook/album-artist-from-artist/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Fill missing album artists
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cookbook/the-artist-sort-names/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sort leading The credits
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cookbook/strip-track-numbers-from-titles/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Remove numbered title prefixes
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cookbook/fix-capitalisation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Capitalization with exceptions
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cookbook/fix-mojibake/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Repair confirmed mojibake
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cookbook/remove-junk-fields/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Keep a reviewed field list
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cookbook/feat-artists-to-title/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Move “feat.” artists out of the artist field
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_7_8" id="__nav_7_8_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Import tags
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Import tags
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cookbook/tags-from-folder-and-filename/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tag files from folder and file names
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cookbook/tracklist-from-text-file/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Apply a tracklist from text
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cookbook/lyrics-from-text-files/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Import lyrics sidecars
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7_9" >
+        
+          
+          <label class="md-nav__link" for="__nav_7_9" id="__nav_7_9_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Exchange text reports
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7_9">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Exchange text reports
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cookbook/csv-for-spreadsheets/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Your library in a spreadsheet
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Platforms
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Platforms
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../platforms/macos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    macOS
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../platforms/windows/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Windows
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../platforms/linux/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Linux
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_9" >
+        
+          
+          <label class="md-nav__link" for="__nav_9" id="__nav_9_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Help
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_9">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Help
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../help/faq/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Frequently asked questions
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../help/troubleshooting/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Troubleshooting
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../help/about/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    About OpenTag and this guide
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#how-to-read-these-tables" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How to read these tables
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#id3v2-and-mp4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ID3v2 and MP4
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#matroska-asf-and-riff-info" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Matroska, ASF, and RIFF INFO
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#custom-field-fallback" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Custom-field fallback
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#field-specific-storage-rules" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Field-specific storage rules
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#user-defined-field-names" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        User-defined field names
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#related" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Related
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+                
+
+
+
+  
+
+
+  <nav class="md-path" aria-label="Navigation" >
+    <ol class="md-path__list">
+      
+        
+  
+  
+    <li class="md-path__item">
+      <a href="../.." class="md-path__link">
+        
+  <span class="md-ellipsis">
+    Home
+  </span>
+
+      </a>
+    </li>
+  
+
+      
+      
+        
+  
+  
+    
+    
+      <li class="md-path__item">
+        <a href="../" class="md-path__link">
+          
+  <span class="md-ellipsis">
+    Reference
+  </span>
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ol>
+  </nav>
+
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+    <a href="https://github.com/johnneerdael/opentag/edit/main/docs/user-guide/reference/tag-mapping.md" title="Edit this page" class="md-content__button md-icon" rel="edit">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m14.06 9 .94.94L5.92 19H5v-.92zm3.6-6c-.25 0-.51.1-.7.29l-1.83 1.83 3.75 3.75 1.83-1.83c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.2-.2-.45-.29-.71-.29m-3.6 3.19L3 17.25V21h3.75L17.81 9.94z"/></svg>
+    </a>
+  
+  
+
+
+<h1 id="tag-mapping-tables">Tag mapping tables<a class="headerlink" href="#tag-mapping-tables" title="Permanent link">&para;</a></h1>
+<p>A mapping connects the editable name <code>ARTIST</code> to native storage such as the <abbr title="The modern MP3 tag at the start of the file, in versions 2.3 and 2.4">ID3v2</abbr> frame <code>TPE1</code> or <abbr title="The container of .m4a, .m4b and .mp4 files; its tags are stored in &quot;atoms&quot;">MP4</abbr> atom <code>©ART</code>. Use the field name in OpenTag; inspect the native identifier when troubleshooting another reader or an existing file.</p>
+<div class="admonition tip">
+<p class="admonition-title">New to this?</p>
+<p>Read <a href="../field-names/">Field names</a> for the meanings and special value syntax. A mapping changes where a value is stored; it does not calculate or translate that value.</p>
+</div>
+<h2 id="how-to-read-these-tables">How to read these tables<a class="headerlink" href="#how-to-read-these-tables" title="Permanent link">&para;</a></h2>
+<p>The tables contain all 118 named fields from OpenTag's source-checked mapping vocabulary. <strong>—</strong> means no dedicated mapping in that cell. It does not always mean the field is forbidden: the <a href="#custom-field-fallback">custom-field fallback</a> explains what is used instead. <abbr title="APEv2 tags, used by Monkey's Audio, Musepack and WavPack files">APE</abbr> and Vorbis Comments store actual field names rather than using this fixed native-identifier table.</p>
+<p><code>TXXX:description</code> denotes an <abbr title="The tag format used by most MP3 files (ID3v1 at the end of the file, ID3v2 at the start)">ID3</abbr> user-text frame with that description. <code>UFID:owner</code> denotes an owner-specific <abbr title="The tag format used by most MP3 files (ID3v1 at the end of the file, ID3v2 at the start)">ID3</abbr> identifier. <code>----:namespace:name</code> denotes an <abbr title="The container of .m4a, .m4b and .mp4 files; its tags are stored in &quot;atoms&quot;">MP4</abbr> freeform atom. The <code>©</code> character is part of a four-character <abbr title="The container of .m4a, .m4b and .mp4 files; its tags are stored in &quot;atoms&quot;">MP4</abbr> identifier, not decorative punctuation.</p>
+<p>These are supported metadata representations, not guarantees that another player uses them or that changing the filename extension converts one format into another. See <a href="../file-formats/">File formats</a> for which tag family a file uses.</p>
+<h2 id="id3v2-and-mp4"><abbr title="The modern MP3 tag at the start of the file, in versions 2.3 and 2.4">ID3v2</abbr> and <abbr title="The container of .m4a, .m4b and .mp4 files; its tags are stored in &quot;atoms&quot;">MP4</abbr><a class="headerlink" href="#id3v2-and-mp4" title="Permanent link">&para;</a></h2>
+<p>The <abbr title="The tag format used by most MP3 files (ID3v1 at the end of the file, ID3v2 at the start)">ID3</abbr> columns describe the selected revision's dedicated mapping. A write in another revision can use custom text where no dedicated frame is defined. <abbr title="The container of .m4a, .m4b and .mp4 files; its tags are stored in &quot;atoms&quot;">MP4</abbr> <code>ARTIST</code> writes <code>©ART</code> and reads the alternative <code>©art</code> spelling too. GENRE can read <code>gnre</code> as well as the text atom <code>©gen</code>; ordinary writes use the text representation. Existing alternative/freeform storage can also be normalized on save unless the Advanced reuse options preserve an unchanged field.</p>
+<p>Scroll this comparison horizontally to read complete native identifiers.</p>
+<div aria-label="ID3v2 and MP4 field mappings" class="native-mapping-table" role="region" tabindex="0">
+<!-- native-mapping-id3-mp4:start -->
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th><abbr title="The modern MP3 tag at the start of the file, in versions 2.3 and 2.4">ID3v2</abbr>.3</th>
+<th><abbr title="The modern MP3 tag at the start of the file, in versions 2.3 and 2.4">ID3v2</abbr>.4</th>
+<th><abbr title="The container of .m4a, .m4b and .mp4 files; its tags are stored in &quot;atoms&quot;">MP4</abbr></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>ACOUSTID_ID</code></td>
+<td><code>TXXX:Acoustid Id</code></td>
+<td><code>TXXX:Acoustid Id</code></td>
+<td><code>----:com.apple.iTunes:Acoustid Id</code></td>
+</tr>
+<tr>
+<td><code>ACOUSTID_FINGERPRINT</code></td>
+<td><code>TXXX:Acoustid Fingerprint</code></td>
+<td><code>TXXX:Acoustid Fingerprint</code></td>
+<td><code>----:com.apple.iTunes:Acoustid Fingerprint</code></td>
+</tr>
+<tr>
+<td><code>ALBUM</code></td>
+<td><code>TALB</code></td>
+<td><code>TALB</code></td>
+<td><code>©alb</code></td>
+</tr>
+<tr>
+<td><code>ALBUMSORT</code></td>
+<td><code>TSOA</code></td>
+<td><code>TSOA</code></td>
+<td><code>soal</code></td>
+</tr>
+<tr>
+<td><code>ALBUMARTIST</code></td>
+<td><code>TPE2</code></td>
+<td><code>TPE2</code></td>
+<td><code>aART</code></td>
+</tr>
+<tr>
+<td><code>ALBUMARTISTSORT</code></td>
+<td><code>TSO2</code></td>
+<td><code>TSO2</code></td>
+<td><code>soaa</code></td>
+</tr>
+<tr>
+<td><code>ARTIST</code></td>
+<td><code>TPE1</code></td>
+<td><code>TPE1</code></td>
+<td><code>©ART</code></td>
+</tr>
+<tr>
+<td><code>ARTISTSORT</code></td>
+<td><code>TSOP</code></td>
+<td><code>TSOP</code></td>
+<td><code>soar</code></td>
+</tr>
+<tr>
+<td><code>BARCODE</code></td>
+<td><code>TXXX:BARCODE</code></td>
+<td><code>TXXX:BARCODE</code></td>
+<td><code>----:com.apple.iTunes:BARCODE</code></td>
+</tr>
+<tr>
+<td><code>BPM</code></td>
+<td><code>TBPM</code></td>
+<td><code>TBPM</code></td>
+<td><code>tmpo</code></td>
+</tr>
+<tr>
+<td><code>CATALOGNUMBER</code></td>
+<td><code>TXXX:CATALOGNUMBER</code></td>
+<td><code>TXXX:CATALOGNUMBER</code></td>
+<td><code>----:com.apple.iTunes:CATALOGNUMBER</code></td>
+</tr>
+<tr>
+<td><code>COMMENT</code></td>
+<td><code>COMM</code></td>
+<td><code>COMM</code></td>
+<td><code>©cmt</code></td>
+</tr>
+<tr>
+<td><code>COMPILATION</code></td>
+<td><code>TCMP</code></td>
+<td><code>TCMP</code></td>
+<td><code>cpil</code></td>
+</tr>
+<tr>
+<td><code>COMPOSER</code></td>
+<td><code>TCOM</code></td>
+<td><code>TCOM</code></td>
+<td><code>©wrt</code></td>
+</tr>
+<tr>
+<td><code>COMPOSERSORT</code></td>
+<td><code>TSOC</code></td>
+<td><code>TSOC</code></td>
+<td><code>soco</code></td>
+</tr>
+<tr>
+<td><code>CONDUCTOR</code></td>
+<td><code>TPE3</code></td>
+<td><code>TPE3</code></td>
+<td><code>©con</code></td>
+</tr>
+<tr>
+<td><code>CONTENTGROUP</code></td>
+<td><code>TIT1</code></td>
+<td><code>TIT1</code></td>
+<td><code>©grp</code></td>
+</tr>
+<tr>
+<td><code>COPYRIGHT</code></td>
+<td><code>TCOP</code></td>
+<td><code>TCOP</code></td>
+<td><code>cprt</code></td>
+</tr>
+<tr>
+<td><code>DATE</code></td>
+<td><code>TDAT</code></td>
+<td><code>TXXX:DATE</code></td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>DESCRIPTION</code></td>
+<td>—</td>
+<td>—</td>
+<td><code>desc</code></td>
+</tr>
+<tr>
+<td><code>DISCNUMBER</code></td>
+<td><code>TPOS</code></td>
+<td><code>TPOS</code></td>
+<td><code>disk</code></td>
+</tr>
+<tr>
+<td><code>ENCODEDBY</code></td>
+<td><code>TENC</code></td>
+<td><code>TENC</code></td>
+<td><code>©enc</code></td>
+</tr>
+<tr>
+<td><code>ENCODERSETTINGS</code></td>
+<td><code>TSSE</code></td>
+<td><code>TSSE</code></td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>ENCODINGTIME</code></td>
+<td>—</td>
+<td><code>TDEN</code></td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>FILEOWNER</code></td>
+<td><code>TOWN</code></td>
+<td><code>TOWN</code></td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>FILETYPE</code></td>
+<td><code>TFLT</code></td>
+<td><code>TFLT</code></td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>GENRE</code></td>
+<td><code>TCON</code></td>
+<td><code>TCON</code></td>
+<td><code>©gen; gnre</code></td>
+</tr>
+<tr>
+<td><code>GROUPING</code></td>
+<td><code>GRP1</code></td>
+<td><code>GRP1</code></td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>INITIALKEY</code></td>
+<td><code>TKEY</code></td>
+<td><code>TKEY</code></td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>INVOLVEDPEOPLE</code></td>
+<td><code>IPLS</code></td>
+<td><code>TIPL</code></td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>ISRC</code></td>
+<td><code>TSRC</code></td>
+<td><code>TSRC</code></td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>LANGUAGE</code></td>
+<td><code>TLAN</code></td>
+<td><code>TLAN</code></td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>LENGTH</code></td>
+<td><code>TLEN</code></td>
+<td><code>TLEN</code></td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>LYRICIST</code></td>
+<td><code>TEXT</code></td>
+<td><code>TEXT</code></td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>MEDIATYPE</code></td>
+<td><code>TMED</code></td>
+<td><code>TMED</code></td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>MIXARTIST</code></td>
+<td><code>TPE4</code></td>
+<td><code>TPE4</code></td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>MOOD</code></td>
+<td>—</td>
+<td><code>TMOO</code></td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>MOVEMENTNAME</code></td>
+<td><code>MVNM</code></td>
+<td><code>MVNM</code></td>
+<td><code>©mvn</code></td>
+</tr>
+<tr>
+<td><code>MOVEMENT</code></td>
+<td><code>MVIN</code></td>
+<td><code>MVIN</code></td>
+<td><code>©mvi</code></td>
+</tr>
+<tr>
+<td><code>MOVEMENTTOTAL</code></td>
+<td><code>MVIN</code></td>
+<td><code>MVIN</code></td>
+<td><code>©mvc</code></td>
+</tr>
+<tr>
+<td><code>MUSICBRAINZ_ALBUMARTISTID</code></td>
+<td><code>TXXX:MusicBrainz Album Artist Id</code></td>
+<td><code>TXXX:MusicBrainz Album Artist Id</code></td>
+<td><code>----:com.apple.iTunes:MusicBrainz Album Artist Id</code></td>
+</tr>
+<tr>
+<td><code>MUSICBRAINZ_ALBUMID</code></td>
+<td><code>TXXX:MusicBrainz Album Id</code></td>
+<td><code>TXXX:MusicBrainz Album Id</code></td>
+<td><code>----:com.apple.iTunes:MusicBrainz Album Id</code></td>
+</tr>
+<tr>
+<td><code>MUSICBRAINZ_ALBUMRELEASECOUNTRY</code></td>
+<td><code>TXXX:MusicBrainz Album Release Country</code></td>
+<td><code>TXXX:MusicBrainz Album Release Country</code></td>
+<td><code>----:com.apple.iTunes:MusicBrainz Album Release Country</code></td>
+</tr>
+<tr>
+<td><code>MUSICBRAINZ_ALBUMSTATUS</code></td>
+<td><code>TXXX:MusicBrainz Album Status</code></td>
+<td><code>TXXX:MusicBrainz Album Status</code></td>
+<td><code>----:com.apple.iTunes:MusicBrainz Album Status</code></td>
+</tr>
+<tr>
+<td><code>MUSICBRAINZ_ALBUMTYPE</code></td>
+<td><code>TXXX:MusicBrainz Album Type</code></td>
+<td><code>TXXX:MusicBrainz Album Type</code></td>
+<td><code>----:com.apple.iTunes:MusicBrainz Album Type</code></td>
+</tr>
+<tr>
+<td><code>MUSICBRAINZ_ARTISTID</code></td>
+<td><code>TXXX:MusicBrainz Artist Id</code></td>
+<td><code>TXXX:MusicBrainz Artist Id</code></td>
+<td><code>----:com.apple.iTunes:MusicBrainz Artist Id</code></td>
+</tr>
+<tr>
+<td><code>MUSICBRAINZ_DISCID</code></td>
+<td><code>TXXX:MusicBrainz Disc Id</code></td>
+<td><code>TXXX:MusicBrainz Disc Id</code></td>
+<td><code>----:com.apple.iTunes:MusicBrainz Disc Id</code></td>
+</tr>
+<tr>
+<td><code>MUSICBRAINZ_ORIGINALALBUMID</code></td>
+<td><code>TXXX:MusicBrainz Original Album Id</code></td>
+<td><code>TXXX:MusicBrainz Original Album Id</code></td>
+<td><code>----:com.apple.iTunes:MusicBrainz Original Album Id</code></td>
+</tr>
+<tr>
+<td><code>MUSICBRAINZ_ORIGINALARTISTID</code></td>
+<td><code>TXXX:MusicBrainz Original Artist Id</code></td>
+<td><code>TXXX:MusicBrainz Original Artist Id</code></td>
+<td><code>----:com.apple.iTunes:MusicBrainz Original Artist Id</code></td>
+</tr>
+<tr>
+<td><code>MUSICBRAINZ_RELEASEGROUPID</code></td>
+<td><code>TXXX:MusicBrainz Release Group Id</code></td>
+<td><code>TXXX:MusicBrainz Release Group Id</code></td>
+<td><code>----:com.apple.iTunes:MusicBrainz Release Group Id</code></td>
+</tr>
+<tr>
+<td><code>MUSICBRAINZ_RELEASETRACKID</code></td>
+<td><code>TXXX:MusicBrainz Release Track Id</code></td>
+<td><code>TXXX:MusicBrainz Release Track Id</code></td>
+<td><code>----:com.apple.iTunes:MusicBrainz Release Track Id</code></td>
+</tr>
+<tr>
+<td><code>MUSICBRAINZ_TRACKID</code></td>
+<td><code>UFID:http://musicbrainz.org</code></td>
+<td><code>UFID:http://musicbrainz.org</code></td>
+<td><code>----:com.apple.iTunes:MusicBrainz Track Id</code></td>
+</tr>
+<tr>
+<td><code>MUSICBRAINZ_TRMID</code></td>
+<td><code>TXXX:MusicBrainz TRM Id</code></td>
+<td><code>TXXX:MusicBrainz TRM Id</code></td>
+<td><code>----:com.apple.iTunes:MusicBrainz TRM Id</code></td>
+</tr>
+<tr>
+<td><code>MUSICBRAINZ_WORKID</code></td>
+<td><code>TXXX:MusicBrainz Work Id</code></td>
+<td><code>TXXX:MusicBrainz Work Id</code></td>
+<td><code>----:com.apple.iTunes:MusicBrainz Work Id</code></td>
+</tr>
+<tr>
+<td><code>MUSICIANCREDITS</code></td>
+<td>—</td>
+<td><code>TMCL</code></td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>NARRATOR</code></td>
+<td>—</td>
+<td>—</td>
+<td><code>©nrt</code></td>
+</tr>
+<tr>
+<td><code>NETRADIOOWNER</code></td>
+<td><code>TRSO</code></td>
+<td><code>TRSO</code></td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>NETRADIOSTATION</code></td>
+<td><code>TRSN</code></td>
+<td><code>TRSN</code></td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>ORIGALBUM</code></td>
+<td><code>TOAL</code></td>
+<td><code>TOAL</code></td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>ORIGARTIST</code></td>
+<td><code>TOPE</code></td>
+<td><code>TOPE</code></td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>ORIGFILENAME</code></td>
+<td><code>TOFN</code></td>
+<td><code>TOFN</code></td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>ORIGLYRICIST</code></td>
+<td><code>TOLY</code></td>
+<td><code>TOLY</code></td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>ORIGYEAR</code></td>
+<td><code>TORY</code></td>
+<td><code>TDOR</code></td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>PODCAST</code></td>
+<td><code>PCST</code></td>
+<td><code>PCST</code></td>
+<td><code>pcst</code></td>
+</tr>
+<tr>
+<td><code>PODCASTCATEGORY</code></td>
+<td><code>TCAT</code></td>
+<td><code>TCAT</code></td>
+<td><code>catg</code></td>
+</tr>
+<tr>
+<td><code>PODCASTDESC</code></td>
+<td><code>TDES</code></td>
+<td><code>TDES</code></td>
+<td><code>ldes</code></td>
+</tr>
+<tr>
+<td><code>PODCASTID</code></td>
+<td><code>TGID</code></td>
+<td><code>TGID</code></td>
+<td><code>egid</code></td>
+</tr>
+<tr>
+<td><code>PODCASTKEYWORDS</code></td>
+<td><code>TKWD</code></td>
+<td><code>TKWD</code></td>
+<td><code>keyw</code></td>
+</tr>
+<tr>
+<td><code>PODCASTURL</code></td>
+<td><code>WFED</code></td>
+<td><code>WFED</code></td>
+<td><code>purl</code></td>
+</tr>
+<tr>
+<td><code>POPULARIMETER</code></td>
+<td><code>POPM</code></td>
+<td><code>POPM</code></td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>PUBLISHER</code></td>
+<td><code>TPUB</code></td>
+<td><code>TPUB</code></td>
+<td><code>©pub</code></td>
+</tr>
+<tr>
+<td><code>RATING MM</code></td>
+<td><code>POPM</code></td>
+<td><code>POPM</code></td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>RATING WMP</code></td>
+<td><code>POPM</code></td>
+<td><code>POPM</code></td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>RELEASETIME</code></td>
+<td><code>TDRL</code></td>
+<td><code>TDRL</code></td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>SETSUBTITLE</code></td>
+<td>—</td>
+<td><code>TSST</code></td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>SUBTITLE</code></td>
+<td><code>TIT3</code></td>
+<td><code>TIT3</code></td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>TAGGINGTIME</code></td>
+<td>—</td>
+<td><code>TDTG</code></td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>TITLE</code></td>
+<td><code>TIT2</code></td>
+<td><code>TIT2</code></td>
+<td><code>©nam</code></td>
+</tr>
+<tr>
+<td><code>TITLESORT</code></td>
+<td><code>TSOT</code></td>
+<td><code>TSOT</code></td>
+<td><code>sonm</code></td>
+</tr>
+<tr>
+<td><code>TRACK</code></td>
+<td><code>TRCK</code></td>
+<td><code>TRCK</code></td>
+<td><code>trkn</code></td>
+</tr>
+<tr>
+<td><code>UNIQUEFILEID</code></td>
+<td><code>UFID</code></td>
+<td><code>UFID</code></td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>UNSYNCEDLYRICS</code></td>
+<td><code>USLT</code></td>
+<td><code>USLT</code></td>
+<td><code>©lyr</code></td>
+</tr>
+<tr>
+<td><code>WWW</code></td>
+<td><code>WXXX</code></td>
+<td><code>WXXX</code></td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>WWWARTIST</code></td>
+<td><code>WOAR</code></td>
+<td><code>WOAR</code></td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>WWWAUDIOFILE</code></td>
+<td><code>WOAF</code></td>
+<td><code>WOAF</code></td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>WWWAUDIOSOURCE</code></td>
+<td><code>WOAS</code></td>
+<td><code>WOAS</code></td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>WWWCOMMERCIALINFO</code></td>
+<td><code>WCOM</code></td>
+<td><code>WCOM</code></td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>WWWCOPYRIGHT</code></td>
+<td><code>WCOP</code></td>
+<td><code>WCOP</code></td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>WWWPAYMENT</code></td>
+<td><code>WPAY</code></td>
+<td><code>WPAY</code></td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>WWWPUBLISHER</code></td>
+<td><code>WPUB</code></td>
+<td><code>WPUB</code></td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>WWWRADIOPAGE</code></td>
+<td><code>WORS</code></td>
+<td><code>WORS</code></td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>YEAR</code></td>
+<td><code>TYER</code></td>
+<td><code>TDRC</code></td>
+<td><code>©day</code></td>
+</tr>
+<tr>
+<td><code>DIRECTOR</code></td>
+<td>—</td>
+<td>—</td>
+<td><code>©dir</code></td>
+</tr>
+<tr>
+<td><code>ITUNESACCOUNT</code></td>
+<td>—</td>
+<td>—</td>
+<td><code>apID</code></td>
+</tr>
+<tr>
+<td><code>ITUNESADVISORY</code></td>
+<td>—</td>
+<td>—</td>
+<td><code>rtng</code></td>
+</tr>
+<tr>
+<td><code>ITUNESALBUMID</code></td>
+<td>—</td>
+<td>—</td>
+<td><code>plID</code></td>
+</tr>
+<tr>
+<td><code>ITUNESARTISTID</code></td>
+<td>—</td>
+<td>—</td>
+<td><code>atID</code></td>
+</tr>
+<tr>
+<td><code>ITUNESCATALOGID</code></td>
+<td>—</td>
+<td>—</td>
+<td><code>cnID</code></td>
+</tr>
+<tr>
+<td><code>ITUNESCOMPOSERID</code></td>
+<td>—</td>
+<td>—</td>
+<td><code>cmID</code></td>
+</tr>
+<tr>
+<td><code>ITUNESCOUNTRYID</code></td>
+<td>—</td>
+<td>—</td>
+<td><code>sfID</code></td>
+</tr>
+<tr>
+<td><code>ITUNESGAPLESS</code></td>
+<td>—</td>
+<td>—</td>
+<td><code>pgap</code></td>
+</tr>
+<tr>
+<td><code>ITUNESGENREID</code></td>
+<td>—</td>
+<td>—</td>
+<td><code>geID</code></td>
+</tr>
+<tr>
+<td><code>ITUNESHDVIDEO</code></td>
+<td>—</td>
+<td>—</td>
+<td><code>hdvd</code></td>
+</tr>
+<tr>
+<td><code>ITUNESMEDIATYPE</code></td>
+<td>—</td>
+<td>—</td>
+<td><code>stik</code></td>
+</tr>
+<tr>
+<td><code>ITUNESOWNER</code></td>
+<td>—</td>
+<td>—</td>
+<td><code>ownr</code></td>
+</tr>
+<tr>
+<td><code>ITUNESPURCHASEDATE</code></td>
+<td>—</td>
+<td>—</td>
+<td><code>purd</code></td>
+</tr>
+<tr>
+<td><code>RATE</code></td>
+<td>—</td>
+<td>—</td>
+<td><code>rate</code></td>
+</tr>
+<tr>
+<td><code>SHOWMOVEMENT</code></td>
+<td>—</td>
+<td>—</td>
+<td><code>shwm</code></td>
+</tr>
+<tr>
+<td><code>STOREDESCRIPTION</code></td>
+<td>—</td>
+<td>—</td>
+<td><code>sdes</code></td>
+</tr>
+<tr>
+<td><code>TOTALDISCS</code></td>
+<td>—</td>
+<td>—</td>
+<td><code>disk</code></td>
+</tr>
+<tr>
+<td><code>TOTALTRACKS</code></td>
+<td>—</td>
+<td>—</td>
+<td><code>trkn</code></td>
+</tr>
+<tr>
+<td><code>TVEPISODE</code></td>
+<td>—</td>
+<td>—</td>
+<td><code>tves</code></td>
+</tr>
+<tr>
+<td><code>TVEPISODEID</code></td>
+<td>—</td>
+<td>—</td>
+<td><code>tven</code></td>
+</tr>
+<tr>
+<td><code>TVNETWORK</code></td>
+<td>—</td>
+<td>—</td>
+<td><code>tvnn</code></td>
+</tr>
+<tr>
+<td><code>TVSEASON</code></td>
+<td>—</td>
+<td>—</td>
+<td><code>tvsn</code></td>
+</tr>
+<tr>
+<td><code>TVSHOW</code></td>
+<td>—</td>
+<td>—</td>
+<td><code>tvsh</code></td>
+</tr>
+<tr>
+<td><code>TVSHOWSORT</code></td>
+<td>—</td>
+<td>—</td>
+<td><code>sosn</code></td>
+</tr>
+<tr>
+<td><code>WORK</code></td>
+<td>—</td>
+<td>—</td>
+<td><code>©wrk</code></td>
+</tr>
+</tbody>
+</table>
+<!-- native-mapping-id3-mp4:end -->
+</div>
+<h2 id="matroska-asf-and-riff-info">Matroska, <abbr title="Advanced Systems Format, the container of Windows Media (.wma) files">ASF</abbr>, and RIFF INFO<a class="headerlink" href="#matroska-asf-and-riff-info" title="Permanent link">&para;</a></h2>
+<p><code>T=30</code>, <code>T=50</code>, and similar Matroska entries are target type values. When no native name follows a target, use the field's own name. MKA entries describe the audio mapping; MKV entries describe the recommended video mapping when a video track is present and that Advanced option is enabled. A <code>.mkv</code> suffix alone does not select it.</p>
+<p><code>SORT_WITH</code> is nested under that level's TITLE. For example, album sorting is nested under the album-level TITLE rather than stored as an unrelated global text tag. <code>PART_NUMBER</code> at target 30 represents a track; target 50 represents a disc in audio mapping, or an episode in the recommended video mapping.</p>
+<p>Scroll this comparison horizontally to read complete native identifiers.</p>
+<div aria-label="Matroska ASF and RIFF field mappings" class="native-mapping-table" role="region" tabindex="0">
+<!-- native-mapping-containers:start -->
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Matroska</th>
+<th><abbr title="Advanced Systems Format, the container of Windows Media (.wma) files">ASF</abbr> / Windows Media</th>
+<th>RIFF INFO</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>ACOUSTID_ID</code></td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>ACOUSTID_FINGERPRINT</code></td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>ALBUM</code></td>
+<td><code>MKA:T=50 TITLE MKV: T=60 TITLE</code></td>
+<td><code>WM/AlbumTitle</code></td>
+<td><code>IPRD</code></td>
+</tr>
+<tr>
+<td><code>ALBUMSORT</code></td>
+<td><code>MKA: T=50 SORT_WITH MKV: T=60 SORT_WITH</code></td>
+<td><code>WM/AlbumSortOrder</code></td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>ALBUMARTIST</code></td>
+<td><code>MKA: T=50 ARTIST MKV: T=60 ARTIST</code></td>
+<td><code>WM/AlbumArtist</code></td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>ALBUMARTISTSORT</code></td>
+<td><code>T=30</code></td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>ARTIST</code></td>
+<td><code>MKA: T=30 ARTIST MKV: T=50 ARTIST</code></td>
+<td><code>Author</code></td>
+<td><code>IART</code></td>
+</tr>
+<tr>
+<td><code>ARTISTSORT</code></td>
+<td><code>T=30</code></td>
+<td><code>WM/ArtistSortOrder</code></td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>BARCODE</code></td>
+<td><code>T=30</code></td>
+<td><code>WM/Barcode</code></td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>BPM</code></td>
+<td><code>T=30</code></td>
+<td><code>WM/BeatsPerMinute</code></td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>CATALOGNUMBER</code></td>
+<td><code>T=30</code></td>
+<td><code>WM/CatalogNo</code></td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>COMMENT</code></td>
+<td><code>T=30</code></td>
+<td><code>Description</code></td>
+<td><code>ICMT</code></td>
+</tr>
+<tr>
+<td><code>COMPILATION</code></td>
+<td><code>T=30</code></td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>COMPOSER</code></td>
+<td><code>T=30</code></td>
+<td><code>WM/Composer</code></td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>COMPOSERSORT</code></td>
+<td><code>T=30</code></td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>CONDUCTOR</code></td>
+<td><code>T=30</code></td>
+<td><code>WM/Conductor</code></td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>CONTENTGROUP</code></td>
+<td><code>T=30</code></td>
+<td><code>WM/ContentGroupDescription</code></td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>COPYRIGHT</code></td>
+<td><code>T=30</code></td>
+<td><code>Copyright</code></td>
+<td><code>ICOP</code></td>
+</tr>
+<tr>
+<td><code>DATE</code></td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>DESCRIPTION</code></td>
+<td><code>T=30</code></td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>DISCNUMBER</code></td>
+<td><code>T=50 PART_NUMBER</code></td>
+<td><code>WM/PartOfSet</code></td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>ENCODEDBY</code></td>
+<td><code>MKA: T=30 ENCODED_BY MKV: T=50 ENCODED_BY</code></td>
+<td><code>WM/EncodedBy</code></td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>ENCODERSETTINGS</code></td>
+<td><code>MKA: T=30 MKV: T=50</code></td>
+<td><code>WM/EncodingSettings</code></td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>ENCODINGTIME</code></td>
+<td><code>T=30</code></td>
+<td><code>WM/EncodingTime</code></td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>FILEOWNER</code></td>
+<td><code>MKA: T=30 PURCHASE_OWNER MKV: T=50 PURCHASE_OWNER</code></td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>FILETYPE</code></td>
+<td><code>T=30</code></td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>GENRE</code></td>
+<td><code>T=30</code></td>
+<td><code>WM/Genre</code></td>
+<td><code>IGNR</code></td>
+</tr>
+<tr>
+<td><code>GROUPING</code></td>
+<td><code>T=30</code></td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>INITIALKEY</code></td>
+<td><code>T=30 INITIAL_KEY</code></td>
+<td><code>WM/InitialKey</code></td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>INVOLVEDPEOPLE</code></td>
+<td><code>T=30</code></td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>ISRC</code></td>
+<td><code>T=30</code></td>
+<td><code>WM/ISRC</code></td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>LANGUAGE</code></td>
+<td><code>T=30</code></td>
+<td><code>WM/Language</code></td>
+<td><code>ILNG</code></td>
+</tr>
+<tr>
+<td><code>LENGTH</code></td>
+<td><code>T=30</code></td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>LYRICIST</code></td>
+<td><code>T=30</code></td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>MEDIATYPE</code></td>
+<td><code>T=50 ORIGINAL_MEDIA_TYPE</code></td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>MIXARTIST</code></td>
+<td><code>T=30 REMIXED_BY</code></td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>MOOD</code></td>
+<td><code>T=30</code></td>
+<td><code>WM/Mood</code></td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>MOVEMENTNAME</code></td>
+<td><code>T=20 TITLE</code></td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>MOVEMENT</code></td>
+<td><code>T=20 PART_NUMBER</code></td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>MOVEMENTTOTAL</code></td>
+<td><code>T=30</code></td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>MUSICBRAINZ_ALBUMARTISTID</code></td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>MUSICBRAINZ_ALBUMID</code></td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>MUSICBRAINZ_ALBUMRELEASECOUNTRY</code></td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>MUSICBRAINZ_ALBUMSTATUS</code></td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>MUSICBRAINZ_ALBUMTYPE</code></td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>MUSICBRAINZ_ARTISTID</code></td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>MUSICBRAINZ_DISCID</code></td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>MUSICBRAINZ_ORIGINALALBUMID</code></td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>MUSICBRAINZ_ORIGINALARTISTID</code></td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>MUSICBRAINZ_RELEASEGROUPID</code></td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>MUSICBRAINZ_RELEASETRACKID</code></td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>MUSICBRAINZ_TRACKID</code></td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>MUSICBRAINZ_TRMID</code></td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>MUSICBRAINZ_WORKID</code></td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>MUSICIANCREDITS</code></td>
+<td><code>T=30</code></td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>NARRATOR</code></td>
+<td><code>T=30</code></td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>NETRADIOOWNER</code></td>
+<td><code>T=30</code></td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>NETRADIOSTATION</code></td>
+<td><code>T=30</code></td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>ORIGALBUM</code></td>
+<td><code>T=30</code></td>
+<td><code>WM/OriginalAlbumTitle</code></td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>ORIGARTIST</code></td>
+<td><code>T=30</code></td>
+<td><code>WM/OriginalArtist</code></td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>ORIGFILENAME</code></td>
+<td><code>T=30</code></td>
+<td><code>WM/OriginalFilename</code></td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>ORIGLYRICIST</code></td>
+<td><code>T=30</code></td>
+<td><code>WM/OriginalLyricist</code></td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>ORIGYEAR</code></td>
+<td><code>T=30</code></td>
+<td><code>WM/OriginalReleaseYear</code></td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>PODCAST</code></td>
+<td><code>T=30</code></td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>PODCASTCATEGORY</code></td>
+<td><code>T=30</code></td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>PODCASTDESC</code></td>
+<td><code>T=30</code></td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>PODCASTID</code></td>
+<td><code>T=30</code></td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>PODCASTKEYWORDS</code></td>
+<td><code>T=30</code></td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>PODCASTURL</code></td>
+<td><code>T=30</code></td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>POPULARIMETER</code></td>
+<td><code>T=30</code></td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>PUBLISHER</code></td>
+<td><code>T=30</code></td>
+<td><code>WM/Publisher</code></td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>RATING MM</code></td>
+<td><code>T=30</code></td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>RATING WMP</code></td>
+<td><code>T=30</code></td>
+<td><code>WM/SharedUserRating</code></td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>RELEASETIME</code></td>
+<td><code>T=50 DATE_RELEASED</code></td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>SETSUBTITLE</code></td>
+<td><code>MKA: T=50 SUBTITLE MKV: T=60 SUBTITLE</code></td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>SUBTITLE</code></td>
+<td><code>MKA: T=30 MKV: T=50</code></td>
+<td><code>WM/SubTitle</code></td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>TAGGINGTIME</code></td>
+<td><code>T=30 DATE_TAGGED</code></td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>TITLE</code></td>
+<td><code>MKA: T=30 MKV: T=50</code></td>
+<td><code>Title</code></td>
+<td><code>INAM</code></td>
+</tr>
+<tr>
+<td><code>TITLESORT</code></td>
+<td><code>MKA: T=30 SORT_WITH MKV: T=50 SORT_WITH</code></td>
+<td><code>WM/TitleSortOrder</code></td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>TRACK</code></td>
+<td><code>T=30 PART_NUMBER</code></td>
+<td><code>WM/TrackNumber</code></td>
+<td><code>ITRK</code></td>
+</tr>
+<tr>
+<td><code>UNIQUEFILEID</code></td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>UNSYNCEDLYRICS</code></td>
+<td><code>T=30 LYRICS</code></td>
+<td><code>WM/Lyrics</code></td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>WWW</code></td>
+<td><code>T=30</code></td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>WWWARTIST</code></td>
+<td><code>T=30</code></td>
+<td><code>WM/AuthorURL</code></td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>WWWAUDIOFILE</code></td>
+<td><code>T=30</code></td>
+<td><code>WM/AudioFileURL</code></td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>WWWAUDIOSOURCE</code></td>
+<td><code>T=30</code></td>
+<td><code>WM/AudioSourceURL</code></td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>WWWCOMMERCIALINFO</code></td>
+<td><code>MKA: T=30 PURCHASE_INFO MKV: T=50 PURCHASE_INFO</code></td>
+<td><code>WM/PromotionURL</code></td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>WWWCOPYRIGHT</code></td>
+<td><code>T=30</code></td>
+<td><code>CopyrightURL</code></td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>WWWPAYMENT</code></td>
+<td><code>MKA: T=30 PURCHASE_ITEM MKV: T=50 PURCHASE_ITEM</code></td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>WWWPUBLISHER</code></td>
+<td><code>T=30</code></td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>WWWRADIOPAGE</code></td>
+<td><code>T=30</code></td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>YEAR</code></td>
+<td><code>T=50 DATE_RECORDED</code></td>
+<td><code>WM/Year</code></td>
+<td><code>ICRD</code></td>
+</tr>
+<tr>
+<td><code>DIRECTOR</code></td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>ITUNESACCOUNT</code></td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>ITUNESADVISORY</code></td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>ITUNESALBUMID</code></td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>ITUNESARTISTID</code></td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>ITUNESCATALOGID</code></td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>ITUNESCOMPOSERID</code></td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>ITUNESCOUNTRYID</code></td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>ITUNESGAPLESS</code></td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>ITUNESGENREID</code></td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>ITUNESHDVIDEO</code></td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>ITUNESMEDIATYPE</code></td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>ITUNESOWNER</code></td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>ITUNESPURCHASEDATE</code></td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>RATE</code></td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>SHOWMOVEMENT</code></td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>STOREDESCRIPTION</code></td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>TOTALDISCS</code></td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>TOTALTRACKS</code></td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>TVEPISODE</code></td>
+<td><code>T=50 PART_NUMBER</code></td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>TVEPISODEID</code></td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>TVNETWORK</code></td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>TVSEASON</code></td>
+<td><code>T=60 PART_NUMBER</code></td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>TVSHOW</code></td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>TVSHOWSORT</code></td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>WORK</code></td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+</tr>
+</tbody>
+</table>
+<!-- native-mapping-containers:end -->
+</div>
+<p>In recommended Matroska video mapping, target 50 <code>PART_NUMBER</code> is exposed as <code>TVEPISODE</code>, and target 60 <code>PART_NUMBER</code> as <code>TVSEASON</code>. The audio <code>DISCNUMBER</code> rule is not also applied to that episode value. Mapped native names stored at other, unrecognized levels may remain hidden and preserved. Track/edition/attachment-scoped metadata is not automatically merged into global editable fields; supported chapter-targeted tags belong to their chapter rows.</p>
+<p><abbr title="Advanced Systems Format, the container of Windows Media (.wma) files">ASF</abbr> <code>WM/TrackNumber</code> is the normal track mapping. OpenTag also reads legacy zero-based <code>WM/Track</code> as TRACK plus one when no modern value is present, and keeps an existing legacy attribute synchronized on a TRACK edit. This fallback is not a separate field shown in the table.</p>
+<p>RIFF INFO holds one string per identifier. Multiple edited values are joined with <code>;</code> there, so it cannot preserve separate values in the same way as a multi-value tag. A WAV file can also carry <abbr title="The modern MP3 tag at the start of the file, in versions 2.3 and 2.4">ID3v2</abbr> metadata alongside INFO.</p>
+<h2 id="custom-field-fallback">Custom-field fallback<a class="headerlink" href="#custom-field-fallback" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Tag family</th>
+<th>A field without a dedicated mapping</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><abbr title="The modern MP3 tag at the start of the file, in versions 2.3 and 2.4">ID3v2</abbr></td>
+<td>User text <code>TXXX:FIELDNAME</code>. Described comments/lyrics and owner-specific identifiers have their own syntax.</td>
+</tr>
+<tr>
+<td><abbr title="The container of .m4a, .m4b and .mp4 files; its tags are stored in &quot;atoms&quot;">MP4</abbr></td>
+<td>Freeform <code>----:com.apple.iTunes:FIELDNAME</code>. An explicit freeform namespace/name is also supported.</td>
+</tr>
+<tr>
+<td>Vorbis Comments</td>
+<td>The actual field name stored in the comment list.</td>
+</tr>
+<tr>
+<td><abbr title="APEv2 tags, used by Monkey's Audio, Musepack and WavPack files">APE</abbr></td>
+<td>The actual field name stored in the <abbr title="APEv2 tags, used by Monkey's Audio, Musepack and WavPack files">APE</abbr> item.</td>
+</tr>
+<tr>
+<td><abbr title="Advanced Systems Format, the container of Windows Media (.wma) files">ASF</abbr> / Windows Media</td>
+<td>An attribute under its own name, unless it conflicts with another mapped native attribute.</td>
+</tr>
+<tr>
+<td>Matroska</td>
+<td>An unmapped name is written as a global target-30 SimpleTag; reserved native names cannot be used to bypass their mapped meaning.</td>
+</tr>
+<tr>
+<td>RIFF INFO</td>
+<td>No general long-name fallback. An unmapped four-character uppercase/digit identifier beginning with <code>I</code>, such as <code>IENG</code>, can identify an INFO field.</td>
+</tr>
+</tbody>
+</table>
+<p>For example, <abbr title="Advanced Systems Format, the container of Windows Media (.wma) files">ASF</abbr>’s native <code>Description</code> belongs to COMMENT; trying to use a separate custom <code>DESCRIPTION</code> field can conflict with that mapping and be refused.</p>
+<p>An empty fixed-table cell can therefore produce generic storage on an edit. This is different from claiming a dedicated standard mapping exists. Conversely, binary or unsupported native structures can be preserved without being exposed as a writable text field.</p>
+<h2 id="field-specific-storage-rules">Field-specific storage rules<a class="headerlink" href="#field-specific-storage-rules" title="Permanent link">&para;</a></h2>
+<p>The tables identify native locations. Several fields also impose value structure:</p>
+<ul>
+<li><code>TRACK</code> and <code>DISCNUMBER</code> share their <abbr title="The container of .m4a, .m4b and .mp4 files; its tags are stored in &quot;atoms&quot;">MP4</abbr> atoms with <code>TOTALTRACKS</code> and <code>TOTALDISCS</code>; inconsistent simultaneous totals are rejected.</li>
+<li><code>MOVEMENT</code> and <code>MOVEMENTTOTAL</code> share <abbr title="The modern MP3 tag at the start of the file, in versions 2.3 and 2.4">ID3v2</abbr> MVIN.</li>
+<li><code>COMPILATION</code>, <code>PODCAST</code>, gapless and movement flags, <abbr title="The container of .m4a, .m4b and .mp4 files; its tags are stored in &quot;atoms&quot;">MP4</abbr> store IDs, media types, ratings, credits, and lyrics have their own allowed value forms. See <a href="../field-names/#structured-values">Structured values</a>.</li>
+<li><code>MUSICBRAINZ_TRACKID</code> means recording ID; its <abbr title="The tag format used by most MP3 files (ID3v1 at the end of the file, ID3v2 at the start)">ID3</abbr> storage is the <code>http://musicbrainz.org</code> UFID owner. <code>MUSICBRAINZ_RELEASETRACKID</code> is a different identifier.</li>
+<li><code>YEAR</code> and <code>DATE</code> are not interchangeable date transformations. A user-defined alias changes a name while leaving the text unchanged.</li>
+</ul>
+<p>The source importers can supply BARCODE and CATALOGNUMBER from release data. Historical Mp3tag version annotations about introducing those fields do not describe OpenTag release availability.</p>
+<h2 id="user-defined-field-names">User-defined field names<a class="headerlink" href="#user-defined-field-names" title="Permanent link">&para;</a></h2>
+<p>Use <strong>File → Options… → Tags → Mapping</strong> for per-format Source → Target aliases. On read, the source name is shown as the target. On write, the target is translated back to each source mapped to it. Several sources can share one target; one source cannot map to several different targets. A Vorbis <code>DATE</code> → <code>YEAR</code> rule is an example of harmonizing names without changing the date text.</p>
+<p>These aliases operate above the native identifier mappings. Enter OpenTag's readable field name as Source for <abbr title="The modern MP3 tag at the start of the file, in versions 2.3 and 2.4">ID3v2</abbr>/<abbr title="The container of .m4a, .m4b and .mp4 files; its tags are stored in &quot;atoms&quot;">MP4</abbr>, rather than a frame or atom code. A custom alias does not replace the built-in mapping from <code>TPE1</code> to ARTIST. Matroska is not a selectable tag type in that alias editor.</p>
+<h2 id="related">Related<a class="headerlink" href="#related" title="Permanent link">&para;</a></h2>
+<ul>
+<li><a href="../field-names/">Field vocabulary and structured values</a></li>
+<li><a href="../file-formats/">Format capabilities</a></li>
+<li><a href="../filter-syntax/">Filter syntax</a></li>
+</ul>
+<!-- verified: baseline007a806 crates/tag-core/src/mapping.rs FIELD_MAPPINGS, mp4_ident (ARTIST writer override), mp4_name, patch_id3, patch_mp4, map_read/map_write; crates/tag-core/src/tags.rs tag_fields/riff_key; crates/tag-core/src/matroska.rs mapping_rules/Model; crates/tag-core/src/asf/mod.rs legacy WM/Track. Source-generated factual tables are checked by crates/tag-core/tests/user_guide_filter_reference.rs. Registry ARTIST spelling discrepancy recorded separately in semantic ledger; no app change. -->
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href="../field-names/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Field names">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                Field names
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../file-formats/" class="md-footer__link md-footer__link--next" aria-label="Next: Supported file formats">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                Supported file formats
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      OpenTag is free, open-source software. It is an independent project, compatible with but not affiliated with Mp3tag.
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        
+<div class="md-social">
+  
+    
+    
+    
+    
+    <a href="https://github.com/johnneerdael/opentag" target="_blank" rel="noopener" title="OpenTag on GitHub" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+      <div class="md-progress" data-md-component="progress" role="progressbar"></div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.tabs.sticky", "navigation.sections", "navigation.indexes", "navigation.path", "navigation.top", "navigation.footer", "navigation.instant", "navigation.instant.progress", "navigation.tracking", "toc.follow", "search.suggest", "search.highlight", "search.share", "content.code.copy", "content.code.annotate", "content.tabs.link", "content.tooltips", "content.action.edit"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+    
+  </body>
+</html>
