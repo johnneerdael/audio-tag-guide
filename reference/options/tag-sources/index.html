@@ -3522,6 +3522,20 @@
     
       
         
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
       
         
       
@@ -3543,14 +3557,15 @@
         <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_4" >
         
           
-          <label class="md-nav__link" for="__nav_5_4" id="__nav_5_4_label" tabindex="0">
-            
+          <div class="md-nav__link md-nav__container">
+            <a href="../../../tag-sources/" class="md-nav__link ">
+              
   
   
   <span class="md-ellipsis">
     
   
-    Web sources
+    Tag sources
   
 
     
@@ -3558,19 +3573,167 @@
   
   
 
-            <span class="md-nav__icon md-icon"></span>
-          </label>
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_5_4" id="__nav_5_4_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
         
         <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_4_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_5_4">
             <span class="md-nav__icon md-icon"></span>
             
   
-    Web sources
+    Tag sources
   
 
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../tag-sources/discogs/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Discogs
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../tag-sources/itunes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    iTunes / Apple Music
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../tag-sources/deezer/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Deezer
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../tag-sources/lrclib/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    LRCLIB lyrics
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../tag-sources/acoustid/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    AcoustID fingerprints
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
             
               
                 
@@ -5259,10 +5422,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#credentials-and-service-specific-settings" class="md-nav__link">
+  <a href="#online-services" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Credentials and service-specific settings
+        Online services
       
     </span>
   </a>
@@ -7433,10 +7596,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#credentials-and-service-specific-settings" class="md-nav__link">
+  <a href="#online-services" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Credentials and service-specific settings
+        Online services
       
     </span>
   </a>
@@ -7546,7 +7709,7 @@
 
 
 <h1 id="tag-sources-options">Tag Sources options<a class="headerlink" href="#tag-sources-options" title="Permanent link">&para;</a></h1>
-<p>Open <strong>File → Options… → Tag Sources</strong> for cover-image output and source diagnostics. Server settings are under <a href="../tag-sources-freedb/">freedb</a>; historical offline databases are under <a href="../tag-sources-local-freedb/">Local freedb</a>.</p>
+<p>Open <strong>File → Options… → Tag Sources</strong> or <strong>Tag Sources → Options…</strong> for source lookups, cover-image output and diagnostics. Server settings are under <a href="../tag-sources-freedb/">freedb</a>; historical offline databases are under <a href="../tag-sources-local-freedb/">Local freedb</a>.</p>
 <div class="admonition tip">
 <p class="admonition-title">New to this?</p>
 <p>Saving an image beside an album and embedding it in audio files are separate actions. This page supplies the external image's name; the import review determines what is actually saved.</p>
@@ -7560,24 +7723,74 @@
 when the external image is saved. Review the resulting path and any file
 errors. This names a separate image; it does not rename audio or choose an
 embedded picture type.</p>
+<p><strong>Save image to file</strong> replaces an existing image of the resulting name and
+extension. The review's <strong>Replace existing artwork</strong> choice applies to embedded
+covers, not this external image file.</p>
 <p>This setting does not search for local images and does not choose the starting folder of <strong>Add cover…</strong>; that is <a href="../directories/">Directories → Cover art directory</a>.</p>
 <h2 id="musicbrainz-cover-size">MusicBrainz cover size<a class="headerlink" href="#musicbrainz-cover-size" title="Permanent link">&para;</a></h2>
 <p>Choose <strong>250 pixels</strong>, <strong>500 pixels (default)</strong>, <strong>1200 pixels</strong>, or <strong>Original size</strong>. The choice is used for MusicBrainz artwork from the Cover Art Archive, including its cover-source workflows, and for Cover Art Archive images listed by gnudb.</p>
 <p>Smaller images reduce transfer and storage requirements. Choose 1200 or Original when a high-resolution image is needed, accepting that the original can be much larger. This requests the source's image variant; it is not a local resizer for covers already embedded in files.</p>
 <h2 id="write-debug-output-for-web-sources">Write debug output for web sources<a class="headerlink" href="#write-debug-output-for-web-sources" title="Permanent link">&para;</a></h2>
-<p>Defaults to off. Enable to write downloaded pages and a step-by-step parser trace for <code>.src</code> web-source searches and album lookups. Find the <code>debug</code> folder through <strong>Tag Sources → Open sources folder</strong>.</p>
+<p>Defaults to off. This traces <code>.src</code> scripts, not built-in provider lookups. Enable to write downloaded pages and a step-by-step parser trace for <code>.src</code> web-source searches and album lookups. Find the <code>debug</code> folder through <strong>Tag Sources → Open sources folder</strong>.</p>
 <p>Use the trace to identify whether a source's page structure or parsing steps have changed. Disable it when finished to avoid accumulating downloaded responses. A response or trace can contain search text and service data; inspect it before sharing it in an issue.</p>
-<h2 id="credentials-and-service-specific-settings">Credentials and service-specific settings<a class="headerlink" href="#credentials-and-service-specific-settings" title="Permanent link">&para;</a></h2>
-<p>The Discogs token is set through <strong>Tag Sources → Discogs access token…</strong>, independently of these ordinary settings. A correct cover-size choice does not provide authentication or bypass service restrictions.</p>
-<p>Additional online-service controls belong to the builds that include those services. This page documents the baseline controls above; it does not imply that a future provider shown on a development branch is already present in a release.</p>
+<h2 id="online-services">Online services<a class="headerlink" href="#online-services" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Setting</th>
+<th>Choices and default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>API keys…</strong></td>
+<td>Open the AcoustID, Last.fm and fanart.tv key dialog; storage is separate from ordinary Options.</td>
+</tr>
+<tr>
+<td>iTunes <strong>Store country (two letters)</strong></td>
+<td>For example <code>US</code> (default) or <code>NL</code>; an empty value uses <code>US</code>.</td>
+</tr>
+<tr>
+<td>iTunes <strong>Cover size</strong></td>
+<td>600, 1200 (default) or 3000 pixels</td>
+</tr>
+<tr>
+<td>Deezer <strong>Cover size</strong></td>
+<td>500 or 1000 (default) pixels</td>
+</tr>
+<tr>
+<td><strong>Write synchronized lyrics (LRC time stamps) when available</strong></td>
+<td>Off by default; enable to prefer available LRC text in <code>UNSYNCEDLYRICS</code>.</td>
+</tr>
+<tr>
+<td>Last.fm <strong>Tags written to GENRE</strong></td>
+<td>The top 1 (default), 2, 3 or 5 usable tags</td>
+</tr>
+<tr>
+<td><strong>fpcalc program</strong></td>
+<td>Full executable path for AcoustID; empty for automatic discovery. Does not install <code>fpcalc</code>.</td>
+</tr>
+</tbody>
+</table>
+<p>Cover sizes request provider image variants without guaranteeing availability
+or detail. Last.fm has no cover size option; its supplied images are generally
+smaller.</p>
+<p>Choose <strong>OK</strong> to save Options. API keys have their own <strong>Save</strong> button and
+do not wait for Options OK. Use <strong>Tag Sources → Discogs access token…</strong> for
+its separate credential and optional keychain setting.</p>
+<p>The <strong>freedb</strong> and <strong>Local freedb</strong> subpages configure a <abbr title="Compact Disc Database, the protocol of freedb and gnudb">CDDB</abbr> server and local
+database folder. They do not choose servers for the other online services.</p>
 <h2 id="related">Related<a class="headerlink" href="#related" title="Permanent link">&para;</a></h2>
 <ul>
 <li><a href="../tag-sources-freedb/">freedb server settings</a></li>
 <li><a href="../tag-sources-local-freedb/">Local freedb database</a></li>
+<li><a href="../../../tag-sources/">Tag-source workflow and API keys</a></li>
+<li><a href="../../../tag-sources/lrclib/">LRCLIB lyrics</a></li>
+<li><a href="../../../tag-sources/acoustid/">AcoustID setup</a></li>
 <li><a href="../networking/">Networking</a></li>
 <li><a href="../messages/">Cover preservation messages</a></li>
 </ul>
-<!-- verified: baseline007a806 src/tag-sources.ts tagSourcesOptionsPages, coverTemplate; src-tauri/src/sources MusicBrainz cover-size and cover-output settings; web debug output. PR20 adds Online services, deliberately not described as baseline controls here. -->
+<!-- verified: src/tag-sources.ts:tagSourcesOptionsPages,coverTemplate; src-tauri/src/sources online settings, credential commands and image output. Working-folder/column naming context retained from reviewed main. -->
 
 
 

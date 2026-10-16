@@ -1,11 +1,11 @@
 {
+  "source_commit": "dfe2179541615f09d901de8d3fafbe3b8a70f7a2",
+  "source_sha": "dfe2179541615f09d901de8d3fafbe3b8a70f7a2",
   "source_repository": "https://github.com/johnneerdael/opentag",
-  "source_commit": "dc95b1662a4020e8bdf54e3830e285f0df6b610e",
-  "source_sha": "dc95b1662a4020e8bdf54e3830e285f0df6b610e",
-  "reviewed_pr": 19,
-  "reviewed_head": "946cb29f868a97dc9151b237228c109c4e9db605",
-  "reviewed_validation": 38932040740,
+  "reviewed_pr": 18,
+  "reviewed_head": "d39d86dafe518e6b796d817f3325775fc1c4beed",
+  "reviewed_validation_run": 38940667881,
   "canonical_url": "https://johnneerdael.github.io/audio-tag-guide/",
-  "completed_pages": 166,
-  "build": "Source treeexactreviewed946/mergeddc95;strictpinnedtoolchain;onlydeploymentcanonicalURLoverride."
+  "completed_pages": 172,
+  "scope": "Reviewed-source bootstrap; canonical URL deployment override only. Automatic signed publication and old-route redirects remain pending PR34."
 }
