@@ -8341,7 +8341,7 @@ only what you type in the format string is parsed.</p>
 </tr>
 <tr>
 <td><code>$</code></td>
-<td>Starts a function</td>
+<td>Starts a named function; an end anchor or <code>$1</code> is literal</td>
 <td><code>'$'</code></td>
 </tr>
 <tr>
@@ -8366,8 +8366,8 @@ only what you type in the format string is parsed.</p>
 </tr>
 <tr>
 <td><code>(</code></td>
-<td>Nothing: always plain text</td>
-<td><code>(</code></td>
+<td>Nests literal parentheses inside function arguments</td>
+<td><code>'('</code> when quoting the text</td>
 </tr>
 <tr>
 <td><code>\</code> <code>/</code></td>
@@ -8376,13 +8376,17 @@ only what you type in the format string is parsed.</p>
 </tr>
 </tbody>
 </table>
-<p>Backslash is <strong>not</strong> an escape character in format strings. <code>\%</code> is a
-backslash followed by the start of a placeholder.</p>
+<p>Backslash does not escape placeholders or optional sections: <code>\%</code> is a
+backslash followed by the start of a placeholder. In function arguments,
+escaped parentheses <code>\(</code> and <code>\)</code> remain literal rather than nesting or
+closing the call. Balanced unquoted parentheses nest, keeping their commas
+in the same argument. Text accepted only without nesting, such as an
+unbalanced opening parenthesis, retains its earlier interpretation.</p>
 <div class="admonition warning">
 <p class="admonition-title">Gotcha: <code>)</code> and <code>,</code> inside function arguments</p>
-<p><code>$replace(%title%, (Interlude),)</code> doesn't do what it looks like: the <code>)</code>
-after <em>Interlude</em> ends the function early, and OpenTag reports the
-wrong number of arguments. Quote the text that contains it:</p>
+<p>Balanced text such as <code>$replace(%title%, (Interlude),)</code> is accepted, but
+quoting makes the literal text clear and also protects commas outside a
+balanced group. For example:</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>$replace(%title%,' (Interlude)',)
 </span></code></pre></div>
 <p><code>Fog Horn (Interlude)</code> becomes <code>Fog Horn</code>. The same applies to commas:
@@ -8715,8 +8719,8 @@ nothing is changed. The messages are:</p>
 </tr>
 <tr>
 <td>Expected function call after $…</td>
-<td>A <code>$</code> not followed by a name and <code>(</code></td>
-<td>Write <code>'$'</code> for a dollar sign</td>
+<td>A function-like name after <code>$</code> without <code>(</code></td>
+<td>Complete the call or quote the text; bare <code>$</code> and <code>$1</code> are already literal</td>
 </tr>
 <tr>
 <td>Unsupported scripting function: $…</td>

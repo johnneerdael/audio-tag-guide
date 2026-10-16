@@ -7853,9 +7853,8 @@ If the address fails, resolve the path/port problem before involving OpenTag.</p
 </span><span id="__span-3-24"><a id="__codelineno-3-24" name="__codelineno-3-24" href="#__codelineno-3-24"></a><span class="na">Say "|"</span>
 </span><span id="__span-3-25"><a id="__codelineno-3-25" name="__codelineno-3-25" href="#__codelineno-3-25"></a><span class="na">OutputTo "TRACK"</span>
 </span><span id="__span-3-26"><a id="__codelineno-3-26" name="__codelineno-3-26" href="#__codelineno-3-26"></a><span class="na">json_foreach_counter</span>
-</span><span id="__span-3-27"><a id="__codelineno-3-27" name="__codelineno-3-27" href="#__codelineno-3-27"></a><span class="na">SayRest</span>
-</span><span id="__span-3-28"><a id="__codelineno-3-28" name="__codelineno-3-28" href="#__codelineno-3-28"></a><span class="na">Say "|"</span>
-</span><span id="__span-3-29"><a id="__codelineno-3-29" name="__codelineno-3-29" href="#__codelineno-3-29"></a><span class="na">json_foreach_end</span>
+</span><span id="__span-3-27"><a id="__codelineno-3-27" name="__codelineno-3-27" href="#__codelineno-3-27"></a><span class="na">Say "|"</span>
+</span><span id="__span-3-28"><a id="__codelineno-3-28" name="__codelineno-3-28" href="#__codelineno-3-28"></a><span class="na">json_foreach_end</span>
 </span></code></pre></div>
 <!-- tutorial-source:end -->
 
@@ -7870,8 +7869,7 @@ input, and <code>SayRest</code> appends that text to the current output buffer.
 <p>The array loop changes the JSON context to each track. <code>TITLE</code> and <code>TRACK</code>
 collect per-track values, each followed by <code>|</code>. The final pipe matters: it
 marks a track-valued output rather than a single album-wide value. The
-counter command puts its number on the input; <code>SayRest</code> is still needed to
-copy it to output.</p>
+counter command writes directly to TRACK; no <code>SayRest</code> is needed for it.</p>
 <h2 id="3-give-the-optional-year-a-setting">3. Give the optional year a setting<a class="headerlink" href="#3-give-the-optional-year-a-setting" title="Permanent link">&para;</a></h2>
 <p>Save this JSON as <code>Practice#Settings.settings</code>:</p>
 <!-- tutorial-settings:start -->

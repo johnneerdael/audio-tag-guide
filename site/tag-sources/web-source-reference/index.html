@@ -9368,7 +9368,11 @@ recognized and non-<abbr title="The most common Unicode text encoding">UTF-8</ab
 </tr>
 <tr>
 <td><code>[AlbumUrl]</code></td>
-<td>Album base for a result's relative address, or the direct-lookup address when there is no index stage</td>
+<td>Album base/<code>%s</code> template for a result address, or the direct-lookup address when there is no index stage</td>
+</tr>
+<tr>
+<td><code>[PreviewUrl]</code></td>
+<td>Optional preview address for a direct lookup; <code>%s</code> uses its first search field</td>
 </tr>
 <tr>
 <td><code>[WordSeparator]</code></td>
@@ -9392,7 +9396,7 @@ recognized and non-<abbr title="The most common Unicode text encoding">UTF-8</ab
 </tr>
 <tr>
 <td><code>[ParserScriptIndex]</code></td>
-<td>Script that emits the result list into the unnamed output</td>
+<td>Script that emits the result list into the default <code>OUTPUT</code> buffer</td>
 </tr>
 <tr>
 <td><code>[ParserScriptAlbum]</code></td>
@@ -9416,16 +9420,18 @@ recognized and non-<abbr title="The most common Unicode text encoding">UTF-8</ab
 </tr>
 </tbody>
 </table>
-<p>A source needs an album parser and at least an index or album URL. A missing
-index URL or index parser makes it a direct lookup. Avoid adding an incomplete
-index stage when a known release identifier is all that is needed.</p>
+<p>A source needs an album parser. A missing index URL or index parser makes it
+a direct lookup; its search field may supply a complete web address when no
+IndexUrl/AlbumUrl is set. Avoid adding an incomplete index stage when a known
+release identifier or address is all that is needed.</p>
 <p>The old misspelling <code>WordSeperator</code> is accepted as a fallback, but use
 <code>WordSeparator</code> in new sources. Unknown headers can be retained diagnostically;
 they do not automatically add a feature. In particular, do not infer a
 source-order guarantee from an unverified header in an imported script.</p>
 <h3 id="search-fields-and-url-encoding">Search fields and URL encoding<a class="headerlink" href="#search-fields-and-url-encoding" title="Permanent link">&para;</a></h3>
-<p>A SearchBy entry has <code>Label||default format||URL fragment</code>. Separate entries
-with <code>$$</code>. For example, <code>Artist||%artist%||artist=%s$$Album||%album%||&amp;album=%s</code>
+<p>A SearchBy entry has <code>Label||default format||URL fragment</code>. Triples can follow
+one another with <code>||</code>, or separate entries can use <code>$$</code>. For example,
+<code>Artist||%artist%||artist=%s||Album||%album%||&amp;album=%s</code>
 creates two fields. Defaults use the first selected file. Entered text is split
 into words, encoded according to Encoding, joined with WordSeparator, inserted
 into each fragment, then assembled into the IndexUrl/AlbumUrl <code>%s</code> position.</p>
@@ -9444,15 +9450,15 @@ explicit substitution point is clearer.</p>
 <tbody>
 <tr>
 <td><code>url-utf-8</code></td>
-<td>Default: percent-encode <abbr title="The most common Unicode text encoding">UTF-8</abbr> bytes, retaining unreserved URL characters</td>
+<td>Percent-encode <abbr title="The most common Unicode text encoding">UTF-8</abbr> bytes, retaining unreserved URL characters</td>
 </tr>
 <tr>
 <td><code>url</code></td>
 <td>Percent-encode ISO-8859-1 bytes; unrepresentable characters become <code>?</code> before escaping</td>
 </tr>
 <tr>
-<td><code>utf-8</code></td>
-<td>Keep more ASCII punctuation while escaping address delimiters/control characters and non-ASCII <abbr title="The most common Unicode text encoding">UTF-8</abbr> bytes</td>
+<td>Missing/empty, or <code>utf-8</code></td>
+<td>Keep ASCII punctuation such as <code>:</code> and <code>/</code>, while escaping <code>#</code>, <code>%</code>, <code>&amp;</code>, <code>+</code>, <code>?</code>, controls and non-ASCII <abbr title="The most common Unicode text encoding">UTF-8</abbr> bytes</td>
 </tr>
 <tr>
 <td><code>iso-8859-1</code></td>
@@ -9467,8 +9473,21 @@ explicit substitution point is clearer.</p>
 <p>The <code>ansi</code> row concerns this URL builder. It is not a statement that every
 OpenTag ANSI operation uses the same platform codepage. Prefer <code>url-utf-8</code> for
 a <abbr title="The most common Unicode text encoding">UTF-8</abbr> API unless its actual requirements say otherwise.</p>
+<p>A complete-address direct lookup is different from a search term. When there
+is no album base and exactly one search field with the fragment <code>%s</code>, such as
+<code>URL||%www%||%s</code>, OpenTag uses that field as the complete address. It preserves
+query delimiters, fragments and existing percent escapes instead of applying
+word splitting, WordSeparator or Encoding to the address. The normal HTTP(S)
+address validation still applies; a stored value does not authorize file URLs
+or embedded user credentials.</p>
+<p>For the same complete-address field, <code>[PreviewUrl]=%s</code> also keeps that address.
+A nested preview template such as <code>https://preview.example/?url=%s</code> still uses
+the normal search-word escaping. Use <code>url-utf-8</code> when embedding a URL as that
+parameter's value. ID templates, multiple search fields and ordinary index
+searches continue to encode their input words normally.</p>
 <h3 id="index-results">Index results<a class="headerlink" href="#index-results" title="Permanent link">&para;</a></h3>
-<p>The index script writes to <code>OutputTo ""</code>, the unnamed buffer. Finish each
+<p>Scripts start in the <code>OUTPUT</code> buffer. <code>OutputTo "Output"</code> or <code>OutputTo ""</code>
+returns to that default buffer, which supplies the index results. Finish each
 result with SayNewline. Separate its values with <code>|</code> in the order defined by
 IndexFormat. The field names beginning with <code>_</code> are internal rather than
 visible result columns:</p>
@@ -9479,8 +9498,8 @@ visible result columns:</p>
 <li><code>%_preview%</code>: optional address for previewing the result.</li>
 <li>Other named fields, such as <code>%Album%</code> and <code>%Year%</code>, become visible columns.</li>
 </ul>
-<p>An absolute album URL is used directly. Otherwise AlbumUrl is prefixed when
-provided, and the resulting address is resolved against the downloaded page.
+<p>An absolute album URL is used directly. Otherwise AlbumUrl supplies its base, or substitutes the emitted address into
+its <code>%s</code> position, and the result is resolved against the downloaded page.
 Do not duplicate a path prefix in both the base and emitted result. Cover and
 preview addresses resolve against the page too. Only accepted web addresses
 are used by the request workflow.</p>
@@ -9489,16 +9508,30 @@ are used by the request workflow.</p>
 release. Track-valued buffers contain <code>|</code>-separated entries, conventionally
 ending with <code>|</code>, as in <code>Paper Boats|Lanterns on the Water|</code>. A single track
 also needs its separator to distinguish a track list from one album value.</p>
-<p>TITLE establishes the track count when available; otherwise another
-track-valued output supplies it. Keep TRACK, TITLE, per-track ARTIST and other
-track lists aligned. <code>COVERURL</code>/<code>_COVERURL</code> supplies image addresses. <code>_LENGTH</code>
-can supply per-track duration text in seconds, m:ss or h<img alt="🇲🇲" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/1f1f2-1f1f2.svg" title=":mm:" />ss form. Other
+<p><code>TRACKS</code> establishes the track list/count when supplied, and its nonempty
+values supply titles when <code>TITLE</code> is absent. Otherwise <code>TITLE</code>, or another
+track-valued output, supplies the count. Keep TRACK, TITLE, per-track ARTIST
+and other lists aligned. <code>COVERURL</code>/<code>_COVERURL</code> supplies image addresses.
+<code>_LENGTH</code> accepts m:ss or h<img alt="🇲🇲" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/1f1f2-1f1f2.svg" title=":mm:" />ss; a plain number is milliseconds at every
+magnitude (<code>5000</code> means five seconds). A script supplying plain seconds must
+convert them before output. Other
 underscore-prefixed buffers are internal and are not written as ordinary tags.
 Double backslashes separate multiple values within a field, as in <code>Juniper Vale\\Mira Solberg</code>.</p>
+<p>Stored values decode semicolon-terminated HTML character references and <code>\uXXXX</code> escapes.
+Named references use the complete HTML name set, including two-character
+expansions such as <code>&amp;NotEqualTilde;</code>; names are case-sensitive. Decoding makes
+one pass, so <code>&amp;amp;Alpha;</code> becomes the literal <code>&amp;Alpha;</code>. Decimal and hexadecimal numeric references use the HTML replacement rules:
+<code>&amp;#128;</code> becomes <code>€</code>, while null, surrogate and out-of-range values become
+<code>�</code>. Other valid code points are retained, including C1 controls without a
+replacement. Unknown or malformed references and references without their
+terminating semicolon stay unchanged. A
+single-track release can take album-wide <code>TITLE</code>; <code>ALBUM</code> may be per track.
+<code>TRACKS</code> and <code>OUTPUT</code> are control buffers, not ordinary saved tag fields.</p>
 <p>For a pipe that belongs inside a value, use <code>$verticalBar()</code> in a SayFormat
 or UseFormat expression. It emits a protected marker that the release/result
-conversion restores to a literal pipe after splitting. A raw <code>|</code> would split
-the output instead.</p>
+conversion restores to a literal pipe after splitting. Literal <code>$verticalBar()</code>
+text supplied by a script is handled the same way. A raw <code>|</code> splits the output
+instead.</p>
 <p>This parser-level description does not establish later duration-unit handling
 or automatic file-order suggestions. Check titles/positions and review the
 mapping manually where needed; parser output, release conversion and matching
@@ -9604,14 +9637,18 @@ text for the examples; no request to it is needed. A Settings line supplies
 only the named example variable. Debug files are additional in-memory parser
 results; the app writes them under its sources/debug folder.</p>
 <p>Commands ignore case. Double quotes delimit parser string parameters; <code>\"</code>
-puts a quote inside one. Other backslashes remain literal, so a <abbr title="Regular expression: a pattern that describes a shape of text">regex</abbr> <code>\d</code>
+puts a quote inside one, and <code>\\</code> becomes one backslash. Other backslashes remain literal, so a <abbr title="Regular expression: a pattern that describes a shape of text">regex</abbr> <code>\d</code>
 needs one backslash at this layer. <code>#</code> outside quotes starts a comment.</p>
 <p>Ordinary string parameters substitute existing <code>%output%</code> values. Unknown
-output references can remain literal text, and bare <code>%20</code> is not a field.
+output references can remain literal text; a buffer emptied by <code>Set</code> expands
+to empty text. Bare <code>%20</code> is not a field.
 SayFormat and UseFormat instead evaluate their first argument as a format
 string with <code>%_current%</code> and, unless restricted, named outputs as fields.
-Use that language's apostrophe quoting for literal parentheses, brackets,
-commas or dollar signs inside expressions. See <a href="../../reference/format-strings/">format strings</a>
+Apostrophe quoting protects literal brackets, commas and other syntax in
+expressions. Balanced unquoted parentheses in an argument nest; commas inside
+that text stay in the argument. Escaped <code>\(</code> and <code>\)</code> neither nest nor close
+the call. A dollar sign starting no function name, such as an end anchor <code>$</code>
+or replacement <code>$1</code>, is literal. Quoting remains clearest for complex patterns. See <a href="../../reference/format-strings/">format strings</a>
 and <a href="../../reference/regular-expressions/">regular expressions</a>. The case-sensitive
 parser <abbr title="Regular expression: a pattern that describes a shape of text">regex</abbr> commands below differ from the default case policy of the
 <code>$regexp(...)</code> formatting function.</p>
@@ -9627,7 +9664,7 @@ literal commands. Examples labelled CRLF make output line endings explicit.</p>
 
 <h3 id="findline"><code>FindLine</code><a class="headerlink" href="#findline" title="Permanent link">&para;</a></h3>
 <p><strong>Syntax:</strong> <code>FindLine "text" [occurrence] [optional]</code></p>
-<p>Find the next matching line from the current position and move to its first character. The occurrence counts matching lines, not several copies on one line. Use a third parameter of 1 to leave a missing match nonfatal; the cursor then stays where it was.</p>
+<p>Find the next matching line from the current position and move to its first character. The occurrence counts matching lines, not several copies on one line. Use a third parameter of 1 to leave a missing match nonfatal; the cursor moves past the end of the input.</p>
 <p><strong>Input</strong></p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>Header
 </span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>Album: Old Harbour
@@ -9637,7 +9674,7 @@ literal commands. Examples labelled CRLF make output line endings explicit.</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>FindLine "Album:" 2
 </span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>SayRest
 </span></code></pre></div>
-<p><strong>Output buffer:</strong> <code>unnamed</code></p>
+<p><strong>Output buffer:</strong> <code>OUTPUT</code></p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>Album: Harbour Lights
 </span></code></pre></div>
 <!-- web-example:findlinenocase -->
@@ -9653,14 +9690,14 @@ literal commands. Examples labelled CRLF make output line endings explicit.</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>FindLineNoCase "album:"
 </span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>SayRest
 </span></code></pre></div>
-<p><strong>Output buffer:</strong> <code>unnamed</code></p>
+<p><strong>Output buffer:</strong> <code>OUTPUT</code></p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>ALBUM: Harbour Lights
 </span></code></pre></div>
 <!-- web-example:findinline -->
 
 <h3 id="findinline"><code>FindInLine</code><a class="headerlink" href="#findinline" title="Permanent link">&para;</a></h3>
 <p><strong>Syntax:</strong> <code>FindInLine "text" [occurrence] [optional]</code></p>
-<p>Search the current line from the cursor and place it after the chosen occurrence. A missing match is an error unless the third parameter is 1. It does not search later lines.</p>
+<p>Search the current line from the cursor and place it after the chosen occurrence. A missing match is an error unless the third parameter is 1; an optional failure moves to the end of this line. It does not search later lines.</p>
 <p><strong>Input</strong></p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>Title: old; Title: Paper Boats
 </span></code></pre></div>
@@ -9668,7 +9705,7 @@ literal commands. Examples labelled CRLF make output line endings explicit.</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>FindInLine "Title: " 2
 </span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>SayRest
 </span></code></pre></div>
-<p><strong>Output buffer:</strong> <code>unnamed</code></p>
+<p><strong>Output buffer:</strong> <code>OUTPUT</code></p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>Paper Boats
 </span></code></pre></div>
 <!-- web-example:gotochar -->
@@ -9683,7 +9720,7 @@ literal commands. Examples labelled CRLF make output line endings explicit.</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>GotoChar 8
 </span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>SayRest
 </span></code></pre></div>
-<p><strong>Output buffer:</strong> <code>unnamed</code></p>
+<p><strong>Output buffer:</strong> <code>OUTPUT</code></p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>Lanterns
 </span></code></pre></div>
 <!-- web-example:gotoline -->
@@ -9699,7 +9736,7 @@ literal commands. Examples labelled CRLF make output line endings explicit.</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>GotoLine 2
 </span><span id="__span-13-2"><a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>SayRest
 </span></code></pre></div>
-<p><strong>Output buffer:</strong> <code>unnamed</code></p>
+<p><strong>Output buffer:</strong> <code>OUTPUT</code></p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-14-1"><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>Paper Boats
 </span></code></pre></div>
 <!-- web-example:movechar -->
@@ -9715,7 +9752,7 @@ literal commands. Examples labelled CRLF make output line endings explicit.</p>
 </span><span id="__span-16-2"><a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a>MoveChar -3
 </span><span id="__span-16-3"><a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a>SayNChars 5
 </span></code></pre></div>
-<p><strong>Output buffer:</strong> <code>unnamed</code></p>
+<p><strong>Output buffer:</strong> <code>OUTPUT</code></p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-17-1"><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a>Paper
 </span></code></pre></div>
 <!-- web-example:moveline -->
@@ -9732,7 +9769,7 @@ literal commands. Examples labelled CRLF make output line endings explicit.</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-19-1"><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a>MoveLine 2
 </span><span id="__span-19-2"><a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a>SayRest
 </span></code></pre></div>
-<p><strong>Output buffer:</strong> <code>unnamed</code></p>
+<p><strong>Output buffer:</strong> <code>OUTPUT</code></p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-20-1"><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a>Paper Boats
 </span></code></pre></div>
 <h2 id="read-and-emit-text">Read and emit text<a class="headerlink" href="#read-and-emit-text" title="Permanent link">&para;</a></h2>
@@ -9747,7 +9784,7 @@ literal commands. Examples labelled CRLF make output line endings explicit.</p>
 <p><strong>Script</strong></p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-22-1"><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a>Say "Juniper Vale"
 </span></code></pre></div>
-<p><strong>Output buffer:</strong> <code>unnamed</code></p>
+<p><strong>Output buffer:</strong> <code>OUTPUT</code></p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-23-1"><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a>Juniper Vale
 </span></code></pre></div>
 <!-- web-example:sayuntil -->
@@ -9761,7 +9798,7 @@ literal commands. Examples labelled CRLF make output line endings explicit.</p>
 <p><strong>Script</strong></p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-25-1"><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a>SayUntil "|"
 </span></code></pre></div>
-<p><strong>Output buffer:</strong> <code>unnamed</code></p>
+<p><strong>Output buffer:</strong> <code>OUTPUT</code></p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-26-1"><a id="__codelineno-26-1" name="__codelineno-26-1" href="#__codelineno-26-1"></a>Paper Boats
 </span></code></pre></div>
 <!-- web-example:sayuntilml -->
@@ -9777,7 +9814,7 @@ literal commands. Examples labelled CRLF make output line endings explicit.</p>
 <p><strong>Script</strong></p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-28-1"><a id="__codelineno-28-1" name="__codelineno-28-1" href="#__codelineno-28-1"></a>SayUntilML "&lt;/title&gt;"
 </span></code></pre></div>
-<p><strong>Output buffer:</strong> <code>unnamed</code></p>
+<p><strong>Output buffer:</strong> <code>OUTPUT</code></p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-29-1"><a id="__codelineno-29-1" name="__codelineno-29-1" href="#__codelineno-29-1"></a>Paper
 </span><span id="__span-29-2"><a id="__codelineno-29-2" name="__codelineno-29-2" href="#__codelineno-29-2"></a>Boats
 </span></code></pre></div>
@@ -9793,7 +9830,7 @@ literal commands. Examples labelled CRLF make output line endings explicit.</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-31-1"><a id="__codelineno-31-1" name="__codelineno-31-1" href="#__codelineno-31-1"></a>FindInLine "Title: "
 </span><span id="__span-31-2"><a id="__codelineno-31-2" name="__codelineno-31-2" href="#__codelineno-31-2"></a>SayRest
 </span></code></pre></div>
-<p><strong>Output buffer:</strong> <code>unnamed</code></p>
+<p><strong>Output buffer:</strong> <code>OUTPUT</code></p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-32-1"><a id="__codelineno-32-1" name="__codelineno-32-1" href="#__codelineno-32-1"></a>Paper Boats
 </span></code></pre></div>
 <!-- web-example:saynchars -->
@@ -9808,7 +9845,7 @@ literal commands. Examples labelled CRLF make output line endings explicit.</p>
 <p><strong>Script</strong></p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-34-1"><a id="__codelineno-34-1" name="__codelineno-34-1" href="#__codelineno-34-1"></a>SayNChars 2
 </span></code></pre></div>
-<p><strong>Output buffer:</strong> <code>unnamed</code></p>
+<p><strong>Output buffer:</strong> <code>OUTPUT</code></p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-35-1"><a id="__codelineno-35-1" name="__codelineno-35-1" href="#__codelineno-35-1"></a>␠␠
 </span></code></pre></div>
 <!-- web-example:saynextnumber -->
@@ -9822,7 +9859,7 @@ literal commands. Examples labelled CRLF make output line endings explicit.</p>
 <p><strong>Script</strong></p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-37-1"><a id="__codelineno-37-1" name="__codelineno-37-1" href="#__codelineno-37-1"></a>SayNextNumber
 </span></code></pre></div>
-<p><strong>Output buffer:</strong> <code>unnamed</code></p>
+<p><strong>Output buffer:</strong> <code>OUTPUT</code></p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-38-1"><a id="__codelineno-38-1" name="__codelineno-38-1" href="#__codelineno-38-1"></a>-03.5
 </span></code></pre></div>
 <!-- web-example:saynextword -->
@@ -9836,7 +9873,7 @@ literal commands. Examples labelled CRLF make output line endings explicit.</p>
 <p><strong>Script</strong></p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-40-1"><a id="__codelineno-40-1" name="__codelineno-40-1" href="#__codelineno-40-1"></a>SayNextWord
 </span></code></pre></div>
-<p><strong>Output buffer:</strong> <code>unnamed</code></p>
+<p><strong>Output buffer:</strong> <code>OUTPUT</code></p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-41-1"><a id="__codelineno-41-1" name="__codelineno-41-1" href="#__codelineno-41-1"></a>Paper,
 </span></code></pre></div>
 <!-- web-example:sayoutput -->
@@ -9853,7 +9890,7 @@ literal commands. Examples labelled CRLF make output line endings explicit.</p>
 </span><span id="__span-43-3"><a id="__codelineno-43-3" name="__codelineno-43-3" href="#__codelineno-43-3"></a>Say " @ "
 </span><span id="__span-43-4"><a id="__codelineno-43-4" name="__codelineno-43-4" href="#__codelineno-43-4"></a>SayOutput "CurrentUrl"
 </span></code></pre></div>
-<p><strong>Output buffer:</strong> <code>unnamed</code></p>
+<p><strong>Output buffer:</strong> <code>OUTPUT</code></p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-44-1"><a id="__codelineno-44-1" name="__codelineno-44-1" href="#__codelineno-44-1"></a>Harbour Lights @ https://catalogue.example.invalid/release/harbour
 </span></code></pre></div>
 <!-- web-example:saynewline -->
@@ -9870,7 +9907,7 @@ literal commands. Examples labelled CRLF make output line endings explicit.</p>
 </span><span id="__span-46-2"><a id="__codelineno-46-2" name="__codelineno-46-2" href="#__codelineno-46-2"></a>SayNewline
 </span><span id="__span-46-3"><a id="__codelineno-46-3" name="__codelineno-46-3" href="#__codelineno-46-3"></a>Say "Boats"
 </span></code></pre></div>
-<p><strong>Output buffer:</strong> <code>unnamed</code></p>
+<p><strong>Output buffer:</strong> <code>OUTPUT</code></p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-47-1"><a id="__codelineno-47-1" name="__codelineno-47-1" href="#__codelineno-47-1"></a>Paper
 </span><span id="__span-47-2"><a id="__codelineno-47-2" name="__codelineno-47-2" href="#__codelineno-47-2"></a>Boats
 </span></code></pre></div>
@@ -9885,7 +9922,7 @@ literal commands. Examples labelled CRLF make output line endings explicit.</p>
 <p><strong>Script</strong></p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-49-1"><a id="__codelineno-49-1" name="__codelineno-49-1" href="#__codelineno-49-1"></a>SayDate "ms"
 </span></code></pre></div>
-<p><strong>Output buffer:</strong> <code>unnamed</code></p>
+<p><strong>Output buffer:</strong> <code>OUTPUT</code></p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-50-1"><a id="__codelineno-50-1" name="__codelineno-50-1" href="#__codelineno-50-1"></a>2024-01-01
 </span></code></pre></div>
 <!-- web-example:sayduration -->
@@ -9899,22 +9936,24 @@ literal commands. Examples labelled CRLF make output line endings explicit.</p>
 <p><strong>Script</strong></p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-52-1"><a id="__codelineno-52-1" name="__codelineno-52-1" href="#__codelineno-52-1"></a>SayDuration "ms" 1 1
 </span></code></pre></div>
-<p><strong>Output buffer:</strong> <code>unnamed</code></p>
+<p><strong>Output buffer:</strong> <code>OUTPUT</code></p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-53-1"><a id="__codelineno-53-1" name="__codelineno-53-1" href="#__codelineno-53-1"></a>0:01:02.005
 </span></code></pre></div>
 <!-- web-example:sayregexp -->
 
 <h3 id="sayregexp"><code>SayRegexp</code><a class="headerlink" href="#sayregexp" title="Permanent link">&para;</a></h3>
 <p><strong>Syntax:</strong> <code>SayRegexp "pattern" ["separator"] ["stop text"]</code></p>
-<p>Find every full <abbr title="Regular expression: a pattern that describes a shape of text">regex</abbr> match in the current remainder, joining them with a space by default. Omit the third parameter to search the entire current remainder. A supplied third parameter restricts matching to text before that stop text’s first occurrence; if the supplied stop text is absent from the input, this command emits nothing and leaves the cursor unchanged. After a successful search, the cursor advances to the end of that region and leaves any stop marker for later. A missing stop marker leaves the cursor unchanged. Matching is case-sensitive here; use an inline <abbr title="Regular expression: a pattern that describes a shape of text">regex</abbr> option when another policy is intended.</p>
+<p>Find every full <abbr title="Regular expression: a pattern that describes a shape of text">regex</abbr> match in the current remainder, joining them with a space by default. Omit the third parameter to search the entire current remainder. A supplied third parameter restricts matching to text before that stop text’s first occurrence; if the supplied stop text is absent from the input, this command emits nothing and leaves the cursor unchanged. The cursor stays where it was after matching, so later reads can inspect the same text. Matching is case-sensitive here; use an inline <abbr title="Regular expression: a pattern that describes a shape of text">regex</abbr> option when another policy is intended.</p>
 <p><strong>Input</strong></p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-54-1"><a id="__codelineno-54-1" name="__codelineno-54-1" href="#__codelineno-54-1"></a>item2 item7; item9
 </span></code></pre></div>
 <p><strong>Script</strong></p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-55-1"><a id="__codelineno-55-1" name="__codelineno-55-1" href="#__codelineno-55-1"></a>SayRegexp "item\d" ", " ";"
+</span><span id="__span-55-2"><a id="__codelineno-55-2" name="__codelineno-55-2" href="#__codelineno-55-2"></a>Say "|"
+</span><span id="__span-55-3"><a id="__codelineno-55-3" name="__codelineno-55-3" href="#__codelineno-55-3"></a>SayRest
 </span></code></pre></div>
-<p><strong>Output buffer:</strong> <code>unnamed</code></p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-56-1"><a id="__codelineno-56-1" name="__codelineno-56-1" href="#__codelineno-56-1"></a>item2, item7
+<p><strong>Output buffer:</strong> <code>OUTPUT</code></p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-56-1"><a id="__codelineno-56-1" name="__codelineno-56-1" href="#__codelineno-56-1"></a>item2, item7|item2 item7; item9
 </span></code></pre></div>
 <!-- web-example:sayformat -->
 
@@ -9928,7 +9967,7 @@ literal commands. Examples labelled CRLF make output line endings explicit.</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-58-1"><a id="__codelineno-58-1" name="__codelineno-58-1" href="#__codelineno-58-1"></a>Set "ARTIST" "Juniper Vale"
 </span><span id="__span-58-2"><a id="__codelineno-58-2" name="__codelineno-58-2" href="#__codelineno-58-2"></a>SayFormat "$upper(%_current%) — %ARTIST%"
 </span></code></pre></div>
-<p><strong>Output buffer:</strong> <code>unnamed</code></p>
+<p><strong>Output buffer:</strong> <code>OUTPUT</code></p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-59-1"><a id="__codelineno-59-1" name="__codelineno-59-1" href="#__codelineno-59-1"></a>PAPER BOATS — Juniper Vale
 </span></code></pre></div>
 <!-- web-example:sayvar -->
@@ -9943,7 +9982,7 @@ literal commands. Examples labelled CRLF make output line endings explicit.</p>
 <p><strong>Script</strong></p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-61-1"><a id="__codelineno-61-1" name="__codelineno-61-1" href="#__codelineno-61-1"></a>SayVar "edition"
 </span></code></pre></div>
-<p><strong>Output buffer:</strong> <code>unnamed</code></p>
+<p><strong>Output buffer:</strong> <code>OUTPUT</code></p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-62-1"><a id="__codelineno-62-1" name="__codelineno-62-1" href="#__codelineno-62-1"></a>deluxe
 </span></code></pre></div>
 <h2 id="change-buffers-or-input">Change buffers or input<a class="headerlink" href="#change-buffers-or-input" title="Permanent link">&para;</a></h2>
@@ -9951,7 +9990,7 @@ literal commands. Examples labelled CRLF make output line endings explicit.</p>
 
 <h3 id="set"><code>Set</code><a class="headerlink" href="#set" title="Permanent link">&para;</a></h3>
 <p><strong>Syntax:</strong> <code>Set "buffer" ["value"]</code></p>
-<p>Replace the named buffer with a value. Omit the second parameter to remove that buffer. Unlike OutputTo, this does not switch the destination of later Say commands.</p>
+<p>Replace the named buffer with a value. Omit the second parameter to empty that buffer; later <code>%buffer%</code> references expand to empty text. Unlike OutputTo, this does not switch the destination of later Say commands.</p>
 <p><strong>Input</strong></p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-63-1"><a id="__codelineno-63-1" name="__codelineno-63-1" href="#__codelineno-63-1"></a>
 </span></code></pre></div>
@@ -9962,14 +10001,14 @@ literal commands. Examples labelled CRLF make output line endings explicit.</p>
 </span><span id="__span-64-4"><a id="__codelineno-64-4" name="__codelineno-64-4" href="#__codelineno-64-4"></a>Say "cleared"
 </span><span id="__span-64-5"><a id="__codelineno-64-5" name="__codelineno-64-5" href="#__codelineno-64-5"></a>Endif
 </span></code></pre></div>
-<p><strong>Output buffer:</strong> <code>unnamed</code></p>
+<p><strong>Output buffer:</strong> <code>OUTPUT</code></p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-65-1"><a id="__codelineno-65-1" name="__codelineno-65-1" href="#__codelineno-65-1"></a>cleared
 </span></code></pre></div>
 <!-- web-example:outputto -->
 
 <h3 id="outputto"><code>OutputTo</code><a class="headerlink" href="#outputto" title="Permanent link">&para;</a></h3>
 <p><strong>Syntax:</strong> <code>OutputTo "buffer"</code></p>
-<p>Choose the output used by later Say commands. Text is appended there; it does not clear an earlier value. Use an empty name for the unnamed index-result output.</p>
+<p>Choose the output used by later Say commands. Text is appended there; it does not clear an earlier value. Use an empty name or "Output" to return to the default <code>OUTPUT</code> index-result buffer.</p>
 <p><strong>Input</strong></p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-66-1"><a id="__codelineno-66-1" name="__codelineno-66-1" href="#__codelineno-66-1"></a>Album: Harbour Lights
 </span></code></pre></div>
@@ -9993,7 +10032,7 @@ literal commands. Examples labelled CRLF make output line endings explicit.</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-70-1"><a id="__codelineno-70-1" name="__codelineno-70-1" href="#__codelineno-70-1"></a>SkipChars " _-"
 </span><span id="__span-70-2"><a id="__codelineno-70-2" name="__codelineno-70-2" href="#__codelineno-70-2"></a>SayRest
 </span></code></pre></div>
-<p><strong>Output buffer:</strong> <code>unnamed</code></p>
+<p><strong>Output buffer:</strong> <code>OUTPUT</code></p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-71-1"><a id="__codelineno-71-1" name="__codelineno-71-1" href="#__codelineno-71-1"></a>Paper Boats
 </span></code></pre></div>
 <!-- web-example:insert -->
@@ -10008,7 +10047,7 @@ literal commands. Examples labelled CRLF make output line endings explicit.</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-73-1"><a id="__codelineno-73-1" name="__codelineno-73-1" href="#__codelineno-73-1"></a>Insert "Paper "
 </span><span id="__span-73-2"><a id="__codelineno-73-2" name="__codelineno-73-2" href="#__codelineno-73-2"></a>SayRest
 </span></code></pre></div>
-<p><strong>Output buffer:</strong> <code>unnamed</code></p>
+<p><strong>Output buffer:</strong> <code>OUTPUT</code></p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-74-1"><a id="__codelineno-74-1" name="__codelineno-74-1" href="#__codelineno-74-1"></a>Paper Boats
 </span></code></pre></div>
 <!-- web-example:use -->
@@ -10024,7 +10063,7 @@ literal commands. Examples labelled CRLF make output line endings explicit.</p>
 </span><span id="__span-76-2"><a id="__codelineno-76-2" name="__codelineno-76-2" href="#__codelineno-76-2"></a>Use "%ALBUM%"
 </span><span id="__span-76-3"><a id="__codelineno-76-3" name="__codelineno-76-3" href="#__codelineno-76-3"></a>SayRest
 </span></code></pre></div>
-<p><strong>Output buffer:</strong> <code>unnamed</code></p>
+<p><strong>Output buffer:</strong> <code>OUTPUT</code></p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-77-1"><a id="__codelineno-77-1" name="__codelineno-77-1" href="#__codelineno-77-1"></a>Harbour Lights
 </span></code></pre></div>
 <!-- web-example:useformat -->
@@ -10039,7 +10078,7 @@ literal commands. Examples labelled CRLF make output line endings explicit.</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-79-1"><a id="__codelineno-79-1" name="__codelineno-79-1" href="#__codelineno-79-1"></a>UseFormat "$upper(%_current%)"
 </span><span id="__span-79-2"><a id="__codelineno-79-2" name="__codelineno-79-2" href="#__codelineno-79-2"></a>SayRest
 </span></code></pre></div>
-<p><strong>Output buffer:</strong> <code>unnamed</code></p>
+<p><strong>Output buffer:</strong> <code>OUTPUT</code></p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-80-1"><a id="__codelineno-80-1" name="__codelineno-80-1" href="#__codelineno-80-1"></a>PAPER BOATS
 </span></code></pre></div>
 <h2 id="conditions-and-loops">Conditions and loops<a class="headerlink" href="#conditions-and-loops" title="Permanent link">&para;</a></h2>
@@ -10047,7 +10086,7 @@ literal commands. Examples labelled CRLF make output line endings explicit.</p>
 
 <h3 id="if"><code>If</code><a class="headerlink" href="#if" title="Permanent link">&para;</a></h3>
 <p><strong>Syntax:</strong> <code>If "prefix"</code></p>
-<p>Test whether the current remainder starts with this case-sensitive prefix. This is not a search over the whole line. A false branch jumps to Else or Endif without consuming input.</p>
+<p>Test whether the current remainder starts with this case-sensitive prefix. This is not a search over the whole line. A false branch jumps to Else or Endif without consuming input. With an empty prefix, If "" is true only when the current line has no text left at the cursor.</p>
 <p><strong>Input</strong></p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-81-1"><a id="__codelineno-81-1" name="__codelineno-81-1" href="#__codelineno-81-1"></a>Album: Harbour Lights
 </span></code></pre></div>
@@ -10056,14 +10095,14 @@ literal commands. Examples labelled CRLF make output line endings explicit.</p>
 </span><span id="__span-82-2"><a id="__codelineno-82-2" name="__codelineno-82-2" href="#__codelineno-82-2"></a>Say "album found"
 </span><span id="__span-82-3"><a id="__codelineno-82-3" name="__codelineno-82-3" href="#__codelineno-82-3"></a>Endif
 </span></code></pre></div>
-<p><strong>Output buffer:</strong> <code>unnamed</code></p>
+<p><strong>Output buffer:</strong> <code>OUTPUT</code></p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-83-1"><a id="__codelineno-83-1" name="__codelineno-83-1" href="#__codelineno-83-1"></a>album found
 </span></code></pre></div>
 <!-- web-example:ifnot -->
 
 <h3 id="ifnot"><code>IfNot</code><a class="headerlink" href="#ifnot" title="Permanent link">&para;</a></h3>
 <p><strong>Syntax:</strong> <code>IfNot "prefix"</code></p>
-<p>Take the branch when the current remainder does not start with the prefix. The condition itself does not move the cursor.</p>
+<p>Take the branch when the current remainder does not start with the prefix. An empty prefix instead tests whether text remains: IfNot "" is true while the current remainder is nonempty. The condition itself does not move the cursor.</p>
 <p><strong>Input</strong></p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-84-1"><a id="__codelineno-84-1" name="__codelineno-84-1" href="#__codelineno-84-1"></a>Paper Boats
 </span></code></pre></div>
@@ -10072,7 +10111,7 @@ literal commands. Examples labelled CRLF make output line endings explicit.</p>
 </span><span id="__span-85-2"><a id="__codelineno-85-2" name="__codelineno-85-2" href="#__codelineno-85-2"></a>SayRest
 </span><span id="__span-85-3"><a id="__codelineno-85-3" name="__codelineno-85-3" href="#__codelineno-85-3"></a>Endif
 </span></code></pre></div>
-<p><strong>Output buffer:</strong> <code>unnamed</code></p>
+<p><strong>Output buffer:</strong> <code>OUTPUT</code></p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-86-1"><a id="__codelineno-86-1" name="__codelineno-86-1" href="#__codelineno-86-1"></a>Paper Boats
 </span></code></pre></div>
 <!-- web-example:ifoutput -->
@@ -10089,7 +10128,7 @@ literal commands. Examples labelled CRLF make output line endings explicit.</p>
 </span><span id="__span-88-3"><a id="__codelineno-88-3" name="__codelineno-88-3" href="#__codelineno-88-3"></a>Say "present"
 </span><span id="__span-88-4"><a id="__codelineno-88-4" name="__codelineno-88-4" href="#__codelineno-88-4"></a>Endif
 </span></code></pre></div>
-<p><strong>Output buffer:</strong> <code>unnamed</code></p>
+<p><strong>Output buffer:</strong> <code>OUTPUT</code></p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-89-1"><a id="__codelineno-89-1" name="__codelineno-89-1" href="#__codelineno-89-1"></a>present
 </span></code></pre></div>
 <!-- web-example:ifnotoutput -->
@@ -10105,7 +10144,7 @@ literal commands. Examples labelled CRLF make output line endings explicit.</p>
 </span><span id="__span-91-2"><a id="__codelineno-91-2" name="__codelineno-91-2" href="#__codelineno-91-2"></a>Say "no comment"
 </span><span id="__span-91-3"><a id="__codelineno-91-3" name="__codelineno-91-3" href="#__codelineno-91-3"></a>Endif
 </span></code></pre></div>
-<p><strong>Output buffer:</strong> <code>unnamed</code></p>
+<p><strong>Output buffer:</strong> <code>OUTPUT</code></p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-92-1"><a id="__codelineno-92-1" name="__codelineno-92-1" href="#__codelineno-92-1"></a>no comment
 </span></code></pre></div>
 <!-- web-example:ifgreater -->
@@ -10121,7 +10160,7 @@ literal commands. Examples labelled CRLF make output line endings explicit.</p>
 </span><span id="__span-94-2"><a id="__codelineno-94-2" name="__codelineno-94-2" href="#__codelineno-94-2"></a>Say "large"
 </span><span id="__span-94-3"><a id="__codelineno-94-3" name="__codelineno-94-3" href="#__codelineno-94-3"></a>Endif
 </span></code></pre></div>
-<p><strong>Output buffer:</strong> <code>unnamed</code></p>
+<p><strong>Output buffer:</strong> <code>OUTPUT</code></p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-95-1"><a id="__codelineno-95-1" name="__codelineno-95-1" href="#__codelineno-95-1"></a>large
 </span></code></pre></div>
 <!-- web-example:ifless -->
@@ -10137,7 +10176,7 @@ literal commands. Examples labelled CRLF make output line endings explicit.</p>
 </span><span id="__span-97-2"><a id="__codelineno-97-2" name="__codelineno-97-2" href="#__codelineno-97-2"></a>Say "small"
 </span><span id="__span-97-3"><a id="__codelineno-97-3" name="__codelineno-97-3" href="#__codelineno-97-3"></a>Endif
 </span></code></pre></div>
-<p><strong>Output buffer:</strong> <code>unnamed</code></p>
+<p><strong>Output buffer:</strong> <code>OUTPUT</code></p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-98-1"><a id="__codelineno-98-1" name="__codelineno-98-1" href="#__codelineno-98-1"></a>small
 </span></code></pre></div>
 <!-- web-example:ifvar -->
@@ -10154,7 +10193,7 @@ literal commands. Examples labelled CRLF make output line endings explicit.</p>
 </span><span id="__span-100-2"><a id="__codelineno-100-2" name="__codelineno-100-2" href="#__codelineno-100-2"></a>Say "extra tracks"
 </span><span id="__span-100-3"><a id="__codelineno-100-3" name="__codelineno-100-3" href="#__codelineno-100-3"></a>Endif
 </span></code></pre></div>
-<p><strong>Output buffer:</strong> <code>unnamed</code></p>
+<p><strong>Output buffer:</strong> <code>OUTPUT</code></p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-101-1"><a id="__codelineno-101-1" name="__codelineno-101-1" href="#__codelineno-101-1"></a>extra tracks
 </span></code></pre></div>
 <!-- web-example:ifnotvar -->
@@ -10171,7 +10210,7 @@ literal commands. Examples labelled CRLF make output line endings explicit.</p>
 </span><span id="__span-103-2"><a id="__codelineno-103-2" name="__codelineno-103-2" href="#__codelineno-103-2"></a>Say "alternate edition"
 </span><span id="__span-103-3"><a id="__codelineno-103-3" name="__codelineno-103-3" href="#__codelineno-103-3"></a>Endif
 </span></code></pre></div>
-<p><strong>Output buffer:</strong> <code>unnamed</code></p>
+<p><strong>Output buffer:</strong> <code>OUTPUT</code></p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-104-1"><a id="__codelineno-104-1" name="__codelineno-104-1" href="#__codelineno-104-1"></a>alternate edition
 </span></code></pre></div>
 <!-- web-example:else -->
@@ -10189,7 +10228,7 @@ literal commands. Examples labelled CRLF make output line endings explicit.</p>
 </span><span id="__span-106-4"><a id="__codelineno-106-4" name="__codelineno-106-4" href="#__codelineno-106-4"></a>Say "other"
 </span><span id="__span-106-5"><a id="__codelineno-106-5" name="__codelineno-106-5" href="#__codelineno-106-5"></a>Endif
 </span></code></pre></div>
-<p><strong>Output buffer:</strong> <code>unnamed</code></p>
+<p><strong>Output buffer:</strong> <code>OUTPUT</code></p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-107-1"><a id="__codelineno-107-1" name="__codelineno-107-1" href="#__codelineno-107-1"></a>other
 </span></code></pre></div>
 <!-- web-example:endif -->
@@ -10206,7 +10245,7 @@ literal commands. Examples labelled CRLF make output line endings explicit.</p>
 </span><span id="__span-109-3"><a id="__codelineno-109-3" name="__codelineno-109-3" href="#__codelineno-109-3"></a>Endif
 </span><span id="__span-109-4"><a id="__codelineno-109-4" name="__codelineno-109-4" href="#__codelineno-109-4"></a>Say "."
 </span></code></pre></div>
-<p><strong>Output buffer:</strong> <code>unnamed</code></p>
+<p><strong>Output buffer:</strong> <code>OUTPUT</code></p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-110-1"><a id="__codelineno-110-1" name="__codelineno-110-1" href="#__codelineno-110-1"></a>matched.
 </span></code></pre></div>
 <!-- web-example:do -->
@@ -10222,7 +10261,7 @@ literal commands. Examples labelled CRLF make output line endings explicit.</p>
 </span><span id="__span-112-2"><a id="__codelineno-112-2" name="__codelineno-112-2" href="#__codelineno-112-2"></a>SayNChars 1
 </span><span id="__span-112-3"><a id="__codelineno-112-3" name="__codelineno-112-3" href="#__codelineno-112-3"></a>While "x" 3
 </span></code></pre></div>
-<p><strong>Output buffer:</strong> <code>unnamed</code></p>
+<p><strong>Output buffer:</strong> <code>OUTPUT</code></p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-113-1"><a id="__codelineno-113-1" name="__codelineno-113-1" href="#__codelineno-113-1"></a>xxx
 </span></code></pre></div>
 <!-- web-example:while -->
@@ -10238,7 +10277,7 @@ literal commands. Examples labelled CRLF make output line endings explicit.</p>
 </span><span id="__span-115-2"><a id="__codelineno-115-2" name="__codelineno-115-2" href="#__codelineno-115-2"></a>SayNChars 1
 </span><span id="__span-115-3"><a id="__codelineno-115-3" name="__codelineno-115-3" href="#__codelineno-115-3"></a>While "A" 2
 </span></code></pre></div>
-<p><strong>Output buffer:</strong> <code>unnamed</code></p>
+<p><strong>Output buffer:</strong> <code>OUTPUT</code></p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-116-1"><a id="__codelineno-116-1" name="__codelineno-116-1" href="#__codelineno-116-1"></a>AA
 </span></code></pre></div>
 <h2 id="transform-text-and-whitespace">Transform text and whitespace<a class="headerlink" href="#transform-text-and-whitespace" title="Permanent link">&para;</a></h2>
@@ -10246,22 +10285,27 @@ literal commands. Examples labelled CRLF make output line endings explicit.</p>
 
 <h3 id="replace"><code>Replace</code><a class="headerlink" href="#replace" title="Permanent link">&para;</a></h3>
 <p><strong>Syntax:</strong> <code>Replace "from" "to"</code></p>
-<p>Replace literal matches in the entire current input. The old cursor location is kept and clamped, so reposition after length-changing transformations when needed. An empty search performs no replacement.</p>
+<p>Replace literal matches on the current line only and return the cursor to its start. Other lines are unchanged. An empty search performs no replacement.</p>
 <p><strong>Input</strong></p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-117-1"><a id="__codelineno-117-1" name="__codelineno-117-1" href="#__codelineno-117-1"></a>Paper_Boats
+</span><span id="__span-117-2"><a id="__codelineno-117-2" name="__codelineno-117-2" href="#__codelineno-117-2"></a>Other_Label
 </span></code></pre></div>
 <p><strong>Script</strong></p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-118-1"><a id="__codelineno-118-1" name="__codelineno-118-1" href="#__codelineno-118-1"></a>Replace "_" " "
-</span><span id="__span-118-2"><a id="__codelineno-118-2" name="__codelineno-118-2" href="#__codelineno-118-2"></a>SayRest
+<div class="language-text highlight"><pre><span></span><code><span id="__span-118-1"><a id="__codelineno-118-1" name="__codelineno-118-1" href="#__codelineno-118-1"></a>FindInLine "_"
+</span><span id="__span-118-2"><a id="__codelineno-118-2" name="__codelineno-118-2" href="#__codelineno-118-2"></a>Replace "_" " "
+</span><span id="__span-118-3"><a id="__codelineno-118-3" name="__codelineno-118-3" href="#__codelineno-118-3"></a>SayRest
+</span><span id="__span-118-4"><a id="__codelineno-118-4" name="__codelineno-118-4" href="#__codelineno-118-4"></a>Say "|"
+</span><span id="__span-118-5"><a id="__codelineno-118-5" name="__codelineno-118-5" href="#__codelineno-118-5"></a>MoveLine 1
+</span><span id="__span-118-6"><a id="__codelineno-118-6" name="__codelineno-118-6" href="#__codelineno-118-6"></a>SayRest
 </span></code></pre></div>
-<p><strong>Output buffer:</strong> <code>unnamed</code></p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-119-1"><a id="__codelineno-119-1" name="__codelineno-119-1" href="#__codelineno-119-1"></a>Paper Boats
+<p><strong>Output buffer:</strong> <code>OUTPUT</code></p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-119-1"><a id="__codelineno-119-1" name="__codelineno-119-1" href="#__codelineno-119-1"></a>Paper Boats|Other_Label
 </span></code></pre></div>
 <!-- web-example:regexpreplace -->
 
 <h3 id="regexpreplace"><code>RegexpReplace</code><a class="headerlink" href="#regexpreplace" title="Permanent link">&para;</a></h3>
 <p><strong>Syntax:</strong> <code>RegexpReplace "pattern" "replacement"</code></p>
-<p>Replace <abbr title="Regular expression: a pattern that describes a shape of text">regex</abbr> matches in the entire current input, using case-sensitive matching and Boost replacement captures. These are parser parameters; dollar captures here are not an unquoted $regexp format-string call. Like Replace, it retains/clamps the old cursor position; relocate it deliberately after length changes.</p>
+<p>Replace <abbr title="Regular expression: a pattern that describes a shape of text">regex</abbr> matches on the current line only, using case-sensitive matching and Boost replacement captures, then return the cursor to the line start. These are parser parameters; their dollar captures do not invoke formatting functions.</p>
 <p><strong>Input</strong></p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-120-1"><a id="__codelineno-120-1" name="__codelineno-120-1" href="#__codelineno-120-1"></a>03_Paper Boats
 </span></code></pre></div>
@@ -10269,14 +10313,14 @@ literal commands. Examples labelled CRLF make output line endings explicit.</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-121-1"><a id="__codelineno-121-1" name="__codelineno-121-1" href="#__codelineno-121-1"></a>RegexpReplace "^([0-9]+)_(.*)$" "$2 [$1]"
 </span><span id="__span-121-2"><a id="__codelineno-121-2" name="__codelineno-121-2" href="#__codelineno-121-2"></a>SayRest
 </span></code></pre></div>
-<p><strong>Output buffer:</strong> <code>unnamed</code></p>
+<p><strong>Output buffer:</strong> <code>OUTPUT</code></p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-122-1"><a id="__codelineno-122-1" name="__codelineno-122-1" href="#__codelineno-122-1"></a>Paper Boats [03]
 </span></code></pre></div>
 <!-- web-example:joinuntil -->
 
 <h3 id="joinuntil"><code>JoinUntil</code><a class="headerlink" href="#joinuntil" title="Permanent link">&para;</a></h3>
 <p><strong>Syntax:</strong> <code>JoinUntil "text"</code></p>
-<p>Join the current line through the line containing the next marker, or through input end if absent. If the marker is already in the current remainder, no join is needed. No separator is inserted. Existing spaces at line boundaries determine whether words stay separated.</p>
+<p>Join the current line through the line containing the next marker, or through input end if absent. If the marker is already in the current remainder, no join is needed. No separator is inserted. Existing spaces at line boundaries determine whether words stay separated. The joined later lines remain in place for subsequent line movement.</p>
 <p><strong>Input</strong></p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-123-1"><a id="__codelineno-123-1" name="__codelineno-123-1" href="#__codelineno-123-1"></a>&lt;title&gt;Paper
 </span><span id="__span-123-2"><a id="__codelineno-123-2" name="__codelineno-123-2" href="#__codelineno-123-2"></a> Boats&lt;/title&gt;
@@ -10286,14 +10330,14 @@ literal commands. Examples labelled CRLF make output line endings explicit.</p>
 </span><span id="__span-124-2"><a id="__codelineno-124-2" name="__codelineno-124-2" href="#__codelineno-124-2"></a>FindInLine "&gt;"
 </span><span id="__span-124-3"><a id="__codelineno-124-3" name="__codelineno-124-3" href="#__codelineno-124-3"></a>SayUntil "&lt;/title&gt;"
 </span></code></pre></div>
-<p><strong>Output buffer:</strong> <code>unnamed</code></p>
+<p><strong>Output buffer:</strong> <code>OUTPUT</code></p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-125-1"><a id="__codelineno-125-1" name="__codelineno-125-1" href="#__codelineno-125-1"></a>Paper Boats
 </span></code></pre></div>
 <!-- web-example:joinlines -->
 
 <h3 id="joinlines"><code>JoinLines</code><a class="headerlink" href="#joinlines" title="Permanent link">&para;</a></h3>
 <p><strong>Syntax:</strong> <code>JoinLines count</code></p>
-<p>Join this line with the next count lines, without adding spaces. -1 or a count beyond the remaining range joins all remaining lines. It does not mean a total of count lines including this one.</p>
+<p>Join this line with the next count lines, without adding spaces. -1 or a count beyond the remaining range joins all remaining lines. It does not mean a total of count lines including this one. The later lines remain after their text is copied into the joined line.</p>
 <p><strong>Visible spaces:</strong> <code>␠</code></p>
 <p><strong>Input</strong></p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-126-1"><a id="__codelineno-126-1" name="__codelineno-126-1" href="#__codelineno-126-1"></a>Paper␠
@@ -10303,7 +10347,7 @@ literal commands. Examples labelled CRLF make output line endings explicit.</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-127-1"><a id="__codelineno-127-1" name="__codelineno-127-1" href="#__codelineno-127-1"></a>JoinLines 1
 </span><span id="__span-127-2"><a id="__codelineno-127-2" name="__codelineno-127-2" href="#__codelineno-127-2"></a>SayRest
 </span></code></pre></div>
-<p><strong>Output buffer:</strong> <code>unnamed</code></p>
+<p><strong>Output buffer:</strong> <code>OUTPUT</code></p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-128-1"><a id="__codelineno-128-1" name="__codelineno-128-1" href="#__codelineno-128-1"></a>Paper␠Boats
 </span></code></pre></div>
 <!-- web-example:killtag -->
@@ -10318,7 +10362,7 @@ literal commands. Examples labelled CRLF make output line endings explicit.</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-130-1"><a id="__codelineno-130-1" name="__codelineno-130-1" href="#__codelineno-130-1"></a>KillTag "em"
 </span><span id="__span-130-2"><a id="__codelineno-130-2" name="__codelineno-130-2" href="#__codelineno-130-2"></a>SayRest
 </span></code></pre></div>
-<p><strong>Output buffer:</strong> <code>unnamed</code></p>
+<p><strong>Output buffer:</strong> <code>OUTPUT</code></p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-131-1"><a id="__codelineno-131-1" name="__codelineno-131-1" href="#__codelineno-131-1"></a>Paper Boats
 </span></code></pre></div>
 <!-- web-example:trim -->
@@ -10334,7 +10378,7 @@ literal commands. Examples labelled CRLF make output line endings explicit.</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-133-1"><a id="__codelineno-133-1" name="__codelineno-133-1" href="#__codelineno-133-1"></a>Trim "off"
 </span><span id="__span-133-2"><a id="__codelineno-133-2" name="__codelineno-133-2" href="#__codelineno-133-2"></a>SayRest
 </span></code></pre></div>
-<p><strong>Output buffer:</strong> <code>unnamed</code></p>
+<p><strong>Output buffer:</strong> <code>OUTPUT</code></p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-134-1"><a id="__codelineno-134-1" name="__codelineno-134-1" href="#__codelineno-134-1"></a>␠␠Paper␠␠
 </span></code></pre></div>
 <!-- web-example:unspace -->
@@ -10350,7 +10394,7 @@ literal commands. Examples labelled CRLF make output line endings explicit.</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-136-1"><a id="__codelineno-136-1" name="__codelineno-136-1" href="#__codelineno-136-1"></a>Unspace
 </span><span id="__span-136-2"><a id="__codelineno-136-2" name="__codelineno-136-2" href="#__codelineno-136-2"></a>SayRest
 </span></code></pre></div>
-<p><strong>Output buffer:</strong> <code>unnamed</code></p>
+<p><strong>Output buffer:</strong> <code>OUTPUT</code></p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-137-1"><a id="__codelineno-137-1" name="__codelineno-137-1" href="#__codelineno-137-1"></a>Paper
 </span></code></pre></div>
 <h2 id="debugging">Debugging<a class="headerlink" href="#debugging" title="Permanent link">&para;</a></h2>
@@ -10368,7 +10412,7 @@ literal commands. Examples labelled CRLF make output line endings explicit.</p>
 </span><span id="__span-139-2"><a id="__codelineno-139-2" name="__codelineno-139-2" href="#__codelineno-139-2"></a>SayRest
 </span><span id="__span-139-3"><a id="__codelineno-139-3" name="__codelineno-139-3" href="#__codelineno-139-3"></a>Debug "off"
 </span></code></pre></div>
-<p><strong>Output buffer:</strong> <code>unnamed</code></p>
+<p><strong>Output buffer:</strong> <code>OUTPUT</code></p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-140-1"><a id="__codelineno-140-1" name="__codelineno-140-1" href="#__codelineno-140-1"></a>Paper Boats
 </span></code></pre></div>
 <!-- web-example:debugwriteinput -->
@@ -10385,7 +10429,7 @@ literal commands. Examples labelled CRLF make output line endings explicit.</p>
 </span><span id="__span-142-2"><a id="__codelineno-142-2" name="__codelineno-142-2" href="#__codelineno-142-2"></a>DebugWriteInput "snapshot.txt"
 </span><span id="__span-142-3"><a id="__codelineno-142-3" name="__codelineno-142-3" href="#__codelineno-142-3"></a>SayRest
 </span></code></pre></div>
-<p><strong>Output buffer:</strong> <code>unnamed</code></p>
+<p><strong>Output buffer:</strong> <code>OUTPUT</code></p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-143-1"><a id="__codelineno-143-1" name="__codelineno-143-1" href="#__codelineno-143-1"></a>Paper Boats
 </span></code></pre></div>
 <h2 id="json-mode-and-selection">JSON mode and selection<a class="headerlink" href="#json-mode-and-selection" title="Permanent link">&para;</a></h2>
@@ -10393,7 +10437,7 @@ literal commands. Examples labelled CRLF make output line endings explicit.</p>
 
 <h3 id="json"><code>json</code><a class="headerlink" href="#json" title="Permanent link">&para;</a></h3>
 <p><strong>Syntax:</strong> <code>json "on"|"off" ["current"]</code></p>
-<p>Enable JSON mode from the original downloaded text. Add "current" to parse transformed input instead; "off" leaves JSON mode. JSON selection writes a value to text input so a later Say command can emit it. Turning JSON mode off leaves that current text in place.</p>
+<p>Enable JSON mode from the original downloaded text. Add "current" to parse transformed input from the cursor onward. Text after the first JSON value is ignored. Selection writes a value to text input so a later Say command can emit it. Turning JSON mode off restores the input and cursor saved when JSON mode began.</p>
 <p><strong>Input</strong></p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-144-1"><a id="__codelineno-144-1" name="__codelineno-144-1" href="#__codelineno-144-1"></a>prefix:{"title":"Paper Boats"}
 </span></code></pre></div>
@@ -10403,14 +10447,14 @@ literal commands. Examples labelled CRLF make output line endings explicit.</p>
 </span><span id="__span-145-3"><a id="__codelineno-145-3" name="__codelineno-145-3" href="#__codelineno-145-3"></a>json_select "title"
 </span><span id="__span-145-4"><a id="__codelineno-145-4" name="__codelineno-145-4" href="#__codelineno-145-4"></a>SayRest
 </span></code></pre></div>
-<p><strong>Output buffer:</strong> <code>unnamed</code></p>
+<p><strong>Output buffer:</strong> <code>OUTPUT</code></p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-146-1"><a id="__codelineno-146-1" name="__codelineno-146-1" href="#__codelineno-146-1"></a>Paper Boats
 </span></code></pre></div>
 <!-- web-example:json_foreach -->
 
 <h3 id="json_foreach"><code>json_foreach</code><a class="headerlink" href="#json_foreach" title="Permanent link">&para;</a></h3>
 <p><strong>Syntax:</strong> <code>json_foreach "array"</code></p>
-<p>Enter each array item in its original order. The input initially contains the array size; select the item/field before reading it. An empty/missing array skips the body. Close with json_foreach_end.</p>
+<p>Enter each array item in its original order, or each object member in document order. The input initially contains the collection size; select the item/field before reading it. An empty/missing array skips the body. Close with json_foreach_end.</p>
 <p><strong>Input</strong></p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-147-1"><a id="__codelineno-147-1" name="__codelineno-147-1" href="#__codelineno-147-1"></a>{"tracks":["Paper Boats","Lanterns"]}
 </span></code></pre></div>
@@ -10422,14 +10466,14 @@ literal commands. Examples labelled CRLF make output line endings explicit.</p>
 </span><span id="__span-148-5"><a id="__codelineno-148-5" name="__codelineno-148-5" href="#__codelineno-148-5"></a>Say "|"
 </span><span id="__span-148-6"><a id="__codelineno-148-6" name="__codelineno-148-6" href="#__codelineno-148-6"></a>json_foreach_end
 </span></code></pre></div>
-<p><strong>Output buffer:</strong> <code>unnamed</code></p>
+<p><strong>Output buffer:</strong> <code>OUTPUT</code></p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-149-1"><a id="__codelineno-149-1" name="__codelineno-149-1" href="#__codelineno-149-1"></a>Paper Boats|Lanterns|
 </span></code></pre></div>
 <!-- web-example:json_foreach_reverse -->
 
 <h3 id="json_foreach_reverse"><code>json_foreach_reverse</code><a class="headerlink" href="#json_foreach_reverse" title="Permanent link">&para;</a></h3>
 <p><strong>Syntax:</strong> <code>json_foreach_reverse "array"</code></p>
-<p>Iterate the same array in reverse order. The loop counter still starts at 1 for the first emitted item; it is not the original array index.</p>
+<p>Iterate the same array or object in reverse order. An array counter still starts at 1 for the first emitted item rather than its original index; object counters remain member names.</p>
 <p><strong>Input</strong></p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-150-1"><a id="__codelineno-150-1" name="__codelineno-150-1" href="#__codelineno-150-1"></a>{"tracks":["Paper Boats","Lanterns"]}
 </span></code></pre></div>
@@ -10441,14 +10485,14 @@ literal commands. Examples labelled CRLF make output line endings explicit.</p>
 </span><span id="__span-151-5"><a id="__codelineno-151-5" name="__codelineno-151-5" href="#__codelineno-151-5"></a>Say "|"
 </span><span id="__span-151-6"><a id="__codelineno-151-6" name="__codelineno-151-6" href="#__codelineno-151-6"></a>json_foreach_end
 </span></code></pre></div>
-<p><strong>Output buffer:</strong> <code>unnamed</code></p>
+<p><strong>Output buffer:</strong> <code>OUTPUT</code></p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-152-1"><a id="__codelineno-152-1" name="__codelineno-152-1" href="#__codelineno-152-1"></a>Lanterns|Paper Boats|
 </span></code></pre></div>
 <!-- web-example:json_foreach_counter -->
 
 <h3 id="json_foreach_counter"><code>json_foreach_counter</code><a class="headerlink" href="#json_foreach_counter" title="Permanent link">&para;</a></h3>
 <p><strong>Syntax:</strong> <code>json_foreach_counter [digits]</code></p>
-<p>Put the current one-based loop counter on text input, with optional leading-zero width. It emits nothing until a Say command reads it. Calling it outside an active array loop is an error.</p>
+<p>Append the one-based array-loop counter directly to output, with optional leading-zero width. For an object loop, append the member name instead. It does not replace input and needs no SayRest afterwards. Calling it outside an active loop is an error.</p>
 <p><strong>Input</strong></p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-153-1"><a id="__codelineno-153-1" name="__codelineno-153-1" href="#__codelineno-153-1"></a>{"tracks":["Paper Boats","Lanterns"]}
 </span></code></pre></div>
@@ -10456,18 +10500,17 @@ literal commands. Examples labelled CRLF make output line endings explicit.</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-154-1"><a id="__codelineno-154-1" name="__codelineno-154-1" href="#__codelineno-154-1"></a>json "on"
 </span><span id="__span-154-2"><a id="__codelineno-154-2" name="__codelineno-154-2" href="#__codelineno-154-2"></a>json_foreach "tracks"
 </span><span id="__span-154-3"><a id="__codelineno-154-3" name="__codelineno-154-3" href="#__codelineno-154-3"></a>json_foreach_counter 2
-</span><span id="__span-154-4"><a id="__codelineno-154-4" name="__codelineno-154-4" href="#__codelineno-154-4"></a>SayRest
-</span><span id="__span-154-5"><a id="__codelineno-154-5" name="__codelineno-154-5" href="#__codelineno-154-5"></a>Say "|"
-</span><span id="__span-154-6"><a id="__codelineno-154-6" name="__codelineno-154-6" href="#__codelineno-154-6"></a>json_foreach_end
+</span><span id="__span-154-4"><a id="__codelineno-154-4" name="__codelineno-154-4" href="#__codelineno-154-4"></a>Say "|"
+</span><span id="__span-154-5"><a id="__codelineno-154-5" name="__codelineno-154-5" href="#__codelineno-154-5"></a>json_foreach_end
 </span></code></pre></div>
-<p><strong>Output buffer:</strong> <code>unnamed</code></p>
+<p><strong>Output buffer:</strong> <code>OUTPUT</code></p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-155-1"><a id="__codelineno-155-1" name="__codelineno-155-1" href="#__codelineno-155-1"></a>01|02|
 </span></code></pre></div>
 <!-- web-example:json_foreach_end -->
 
 <h3 id="json_foreach_end"><code>json_foreach_end</code><a class="headerlink" href="#json_foreach_end" title="Permanent link">&para;</a></h3>
 <p><strong>Syntax:</strong> <code>json_foreach_end</code></p>
-<p>Close the last JSON array loop, advance to its next item or leave it. Object selections made inside the iteration are unwound before the next item. Nested JSON loops must close in order.</p>
+<p>Close the last JSON collection loop, advance to its next item or leave it. Object selections made inside the iteration are unwound before the next item. Nested JSON loops must close in order.</p>
 <p><strong>Input</strong></p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-156-1"><a id="__codelineno-156-1" name="__codelineno-156-1" href="#__codelineno-156-1"></a>{"tracks":["Paper","Boats"]}
 </span></code></pre></div>
@@ -10478,7 +10521,7 @@ literal commands. Examples labelled CRLF make output line endings explicit.</p>
 </span><span id="__span-157-4"><a id="__codelineno-157-4" name="__codelineno-157-4" href="#__codelineno-157-4"></a>SayRest
 </span><span id="__span-157-5"><a id="__codelineno-157-5" name="__codelineno-157-5" href="#__codelineno-157-5"></a>json_foreach_end
 </span></code></pre></div>
-<p><strong>Output buffer:</strong> <code>unnamed</code></p>
+<p><strong>Output buffer:</strong> <code>OUTPUT</code></p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-158-1"><a id="__codelineno-158-1" name="__codelineno-158-1" href="#__codelineno-158-1"></a>PaperBoats
 </span></code></pre></div>
 <!-- web-example:json_select_object -->
@@ -10495,14 +10538,14 @@ literal commands. Examples labelled CRLF make output line endings explicit.</p>
 </span><span id="__span-160-3"><a id="__codelineno-160-3" name="__codelineno-160-3" href="#__codelineno-160-3"></a>json_select "title"
 </span><span id="__span-160-4"><a id="__codelineno-160-4" name="__codelineno-160-4" href="#__codelineno-160-4"></a>SayRest
 </span></code></pre></div>
-<p><strong>Output buffer:</strong> <code>unnamed</code></p>
+<p><strong>Output buffer:</strong> <code>OUTPUT</code></p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-161-1"><a id="__codelineno-161-1" name="__codelineno-161-1" href="#__codelineno-161-1"></a>Harbour Lights
 </span></code></pre></div>
 <!-- web-example:json_unselect_object -->
 
 <h3 id="json_unselect_object"><code>json_unselect_object</code><a class="headerlink" href="#json_unselect_object" title="Permanent link">&para;</a></h3>
 <p><strong>Syntax:</strong> <code>json_unselect_object</code></p>
-<p>Return to the preceding JSON context. This does not replace current text input by itself: select another value after returning. It cannot pop an active loop item as though it were a selected object.</p>
+<p>Return to the preceding JSON context. This does not replace current text input by itself: select another value after returning. It cannot pop an active loop item as though it were a selected object. With no additional selected object it stays in the current context.</p>
 <p><strong>Input</strong></p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-162-1"><a id="__codelineno-162-1" name="__codelineno-162-1" href="#__codelineno-162-1"></a>{"title":"root","release":{"title":"inner"}}
 </span></code></pre></div>
@@ -10516,7 +10559,7 @@ literal commands. Examples labelled CRLF make output line endings explicit.</p>
 </span><span id="__span-163-7"><a id="__codelineno-163-7" name="__codelineno-163-7" href="#__codelineno-163-7"></a>json_select "title"
 </span><span id="__span-163-8"><a id="__codelineno-163-8" name="__codelineno-163-8" href="#__codelineno-163-8"></a>SayRest
 </span></code></pre></div>
-<p><strong>Output buffer:</strong> <code>unnamed</code></p>
+<p><strong>Output buffer:</strong> <code>OUTPUT</code></p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-164-1"><a id="__codelineno-164-1" name="__codelineno-164-1" href="#__codelineno-164-1"></a>inner/root
 </span></code></pre></div>
 <!-- web-example:json_select -->
@@ -10532,14 +10575,14 @@ literal commands. Examples labelled CRLF make output line endings explicit.</p>
 </span><span id="__span-166-2"><a id="__codelineno-166-2" name="__codelineno-166-2" href="#__codelineno-166-2"></a>json_select "artist.name"
 </span><span id="__span-166-3"><a id="__codelineno-166-3" name="__codelineno-166-3" href="#__codelineno-166-3"></a>SayRest
 </span></code></pre></div>
-<p><strong>Output buffer:</strong> <code>unnamed</code></p>
+<p><strong>Output buffer:</strong> <code>OUTPUT</code></p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-167-1"><a id="__codelineno-167-1" name="__codelineno-167-1" href="#__codelineno-167-1"></a>Juniper Vale
 </span></code></pre></div>
 <!-- web-example:json_select_array -->
 
 <h3 id="json_select_array"><code>json_select_array</code><a class="headerlink" href="#json_select_array" title="Permanent link">&para;</a></h3>
 <p><strong>Syntax:</strong> <code>json_select_array "array" index ["separator"]</code></p>
-<p>Select a one-based array element, or -1 for all elements joined by the supplied separator. An out-of-range index becomes empty. Without a separator, all-element mode concatenates the values. This one-based index differs from a numeric component in a dotted JSON path.</p>
+<p>Select a one-based array element, or -1 for all elements joined by the supplied separator. An out-of-range index becomes empty. Without a separator, all-element mode concatenates the values. Selecting one object element also enters its context until json_unselect_object. This one-based index differs from a numeric component in a dotted JSON path.</p>
 <p><strong>Input</strong></p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-168-1"><a id="__codelineno-168-1" name="__codelineno-168-1" href="#__codelineno-168-1"></a>{"tracks":["Paper Boats","Lanterns"]}
 </span></code></pre></div>
@@ -10548,7 +10591,7 @@ literal commands. Examples labelled CRLF make output line endings explicit.</p>
 </span><span id="__span-169-2"><a id="__codelineno-169-2" name="__codelineno-169-2" href="#__codelineno-169-2"></a>json_select_array "tracks" -1 " / "
 </span><span id="__span-169-3"><a id="__codelineno-169-3" name="__codelineno-169-3" href="#__codelineno-169-3"></a>SayRest
 </span></code></pre></div>
-<p><strong>Output buffer:</strong> <code>unnamed</code></p>
+<p><strong>Output buffer:</strong> <code>OUTPUT</code></p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-170-1"><a id="__codelineno-170-1" name="__codelineno-170-1" href="#__codelineno-170-1"></a>Paper Boats / Lanterns
 </span></code></pre></div>
 <!-- web-example:json_select_many -->
@@ -10564,7 +10607,7 @@ literal commands. Examples labelled CRLF make output line endings explicit.</p>
 </span><span id="__span-172-2"><a id="__codelineno-172-2" name="__codelineno-172-2" href="#__codelineno-172-2"></a>json_select_many "artists" "name" ", " " &amp; " 2
 </span><span id="__span-172-3"><a id="__codelineno-172-3" name="__codelineno-172-3" href="#__codelineno-172-3"></a>SayRest
 </span></code></pre></div>
-<p><strong>Output buffer:</strong> <code>unnamed</code></p>
+<p><strong>Output buffer:</strong> <code>OUTPUT</code></p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-173-1"><a id="__codelineno-173-1" name="__codelineno-173-1" href="#__codelineno-173-1"></a>Juniper Vale &amp; Mira Solberg
 </span></code></pre></div>
 <!-- web-example:json_select_many_count -->
@@ -10580,7 +10623,7 @@ literal commands. Examples labelled CRLF make output line endings explicit.</p>
 </span><span id="__span-175-2"><a id="__codelineno-175-2" name="__codelineno-175-2" href="#__codelineno-175-2"></a>json_select_many_count "artists" "name" 1
 </span><span id="__span-175-3"><a id="__codelineno-175-3" name="__codelineno-175-3" href="#__codelineno-175-3"></a>SayRest
 </span></code></pre></div>
-<p><strong>Output buffer:</strong> <code>unnamed</code></p>
+<p><strong>Output buffer:</strong> <code>OUTPUT</code></p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-176-1"><a id="__codelineno-176-1" name="__codelineno-176-1" href="#__codelineno-176-1"></a>3
 </span></code></pre></div>
 <h2 id="troubleshoot-and-bound-the-work">Troubleshoot and bound the work<a class="headerlink" href="#troubleshoot-and-bound-the-work" title="Permanent link">&para;</a></h2>
@@ -10594,7 +10637,12 @@ DebugWriteInput captures transformed input; a forced Options trace also retains
 the downloaded input. File names are sanitized and kept under sources/debug.
 Check those files before changing an extraction pattern blindly.</p>
 <p>The checked engine stops after 2,000,000 command steps and checks appended
-output against a 16 MB cumulative byte budget. Debug traces have a default
+output against a 16 MB cumulative byte budget. JoinLines and JoinUntil also
+share a 16 <abbr title="Mebibyte: 1,048,576 bytes">MiB</abbr> budget for bytes appended during one run. Every copy counts,
+including repeated joins and overlapping retained lines; changing or replacing
+the input does not reset it. A join that would exceed the allowance fails
+before appending or moving the cursor. This bounds join growth rather than
+setting a universal size limit for all input transformations. Debug traces have a default
 10 MB cap. These guardrails do not certify
 that a source handles every response size, provider rule or future page layout.
 Keep requests and scripts small while developing, preserve a working copy and

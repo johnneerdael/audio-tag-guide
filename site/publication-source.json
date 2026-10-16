@@ -1,11 +1,11 @@
 {
   "schema": 1,
   "source_repository": "https://github.com/johnneerdael/opentag",
-  "source_commit": "21de24598ac0170faa5be7f4e408389c69af30ac",
-  "reviewed_head": "fa12f23e1749d9dd1e1a3e68b3305dfb3a85b477",
-  "reviewed_pr": 34,
+  "source_commit": "5c49582da4d4e6ba1e63e5fb2f7ce66c1918b0bf",
+  "reviewed_head": "403bf9a2275075d29f5685947c604c9928d554cb",
+  "reviewed_pr": 20,
   "canonical_url": "https://johnneerdael.github.io/audio-tag-guide/",
   "completed_pages": 172,
-  "static_tree_sha256": "84c57115fba7c6f4cf673735f9c0120d8b382197fb992b14ad80c4e46bdb77f3",
+  "static_tree_sha256": "56f10e0ca0fb423c1c84bdb97a36764525213973734725d984215b048615f764",
   "target_workflow_sha256": "45191ce71862df991e5e9d853554bad58861a29837ece07f9a77e1ee138dcb54"
 }

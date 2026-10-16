@@ -8964,9 +8964,10 @@ regular expressions are full of them. <strong>Put the pattern and the replacemen
 in single quotes</strong> to keep their syntax literal:</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>$regexp(%title%,'^(\d+)[ ._-]+(.+)$','$2 [$1]')
 </span></code></pre></div>
-<p>Without the quotes, OpenTag would read <code>$2</code> as the start of a function and
-the first <code>)</code> as the end of <code>$regexp</code>, and report an error. Inside quotes,
-write an apostrophe as <code>''</code>:</p>
+<p>Balanced unquoted groups can also work: argument parentheses nest, and
+dollar captures such as <code>$2</code> remain literal. Quotes still protect other
+format syntax, including optional-section brackets and argument commas.
+Inside quotes, write an apostrophe as <code>''</code>:</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>$regexp(%title%,'(?&lt;![\w''])(\w)','\u$1')
 </span></code></pre></div>
 <p>To remove matches, leave the replacement argument empty after its comma:</p>
